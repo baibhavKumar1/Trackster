@@ -3,7 +3,7 @@ import { CREATE_EVENT_ERROR, CREATE_EVENT_REQUEST,CREATE_EVENT_SUCCESS,ADD_ATTEN
 const init= {
     isLoading:false,
     isError: false,
-    event:"",
+    events:[],
     message:""
 }
 
@@ -14,7 +14,7 @@ export const EventReducer = (state=init, {type,payload})=>{
     case CREATE_EVENT_ERROR: return {...state,isLoading:false, isError:true}
     
     case GET_EVENT_REQUEST: return {...state, isLoading:true}
-    case GET_EVENT_SUCCESS: return {...state,isLoading:false, event:payload.data}
+    case GET_EVENT_SUCCESS: return {...state,isLoading:false, events:payload.data}
     case GET_EVENT_ERROR: return {...state,isLoading:false, isError:true}
 
     case ADD_ATTENDEE_REQUEST: return {...state, isLoading:true}

@@ -4,20 +4,19 @@ import { CiCalendar } from 'react-icons/ci'
 import { RiCompassLine } from "react-icons/ri";
 import { GoGear, GoPlus } from 'react-icons/go';
 import { TiMessages } from "react-icons/ti";
-import { PiLightningThin } from "react-icons/pi";
+// import { PiLightningThin } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 
-const Sidebar = () => {
+const AdminSidebar = () => {
     return (
-        <div className="fixed top-0 left-0 h-screen border flex flex-col w-1/6 p-6 justify-between">
+        <div className="fixed top-0 left-0 h-screen border flex flex-col w-1/6 p-6 justify-between ">
             <div>
                 <NavLink to='/'><div className="flex items-center gap-3 my-3 mb-7">
                     <GiFeather color="darkorange" size="2em" /><Text className="text-2xl font-semibold">Trackster</Text>
                 </div></NavLink>
                 <div className="flex flex-col gap-7 text-lg">
-                    <NavLink to='/explore'><div className="flex items-center gap-4"><RiCompassLine size="1.5em"/><Text>Explore</Text></div></NavLink>
-                    <NavLink to="/events"><div className="flex items-center gap-4"><CiCalendar size="1.5em"/><Text>My Events</Text></div></NavLink>
-                    <NavLink to="/messages"><div className="flex items-center gap-4"><TiMessages size="1.5em"/><Text>Messages</Text></div></NavLink>
+                    <NavLink to='/explore'><div className="flex items-center gap-4"><RiCompassLine size="1.5em"/><Text>Users</Text></div></NavLink>
+                    <NavLink to="/events"><div className="flex items-center gap-4"><CiCalendar size="1.5em"/><Text>Events</Text></div></NavLink>
                     <NavLink to="/admin"><div className="flex items-center gap-4"><TiMessages size="1.5em"/><Text>Admin</Text></div></NavLink>
                     <button ><div className="flex items-center p-2 justify-center gap-2 bg-orange-600 rounded-xl text-white"><GoPlus size="1.8em"/><Text>Add Note</Text></div></button>
 
@@ -28,4 +27,4 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar
+export default AdminSidebar

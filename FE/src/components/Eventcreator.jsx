@@ -12,7 +12,6 @@ export const Eventcreator = ({ onOpens, LetClose }) => {
         venue: '',
         description: '',
         date: '',
-        time: '',
         image: '',
         token:token
     });
@@ -27,14 +26,13 @@ export const Eventcreator = ({ onOpens, LetClose }) => {
 
     const handleSignup = (e) => {
         e.preventDefault()
-        console.log(formData)
+        //console.log(formData)
         dispatch(CreateEvent(formData))
         setFormData({
             name: '',
             venue: '',
             description: '',
             date: '',
-            time: '',
             image: ''
         })
         LetClose();
@@ -86,18 +84,9 @@ export const Eventcreator = ({ onOpens, LetClose }) => {
                     />
                     <Input
                         name="date"
-                        type="date"
+                        type="datetime-local"
                         placeholder="Date"
                         value={formData.date}
-                        onChange={handleChange}
-                        marginBottom={4}
-                         fontSize={"16px"} className='justify-center  items-center'
-                    />
-                    <Input
-                        name="time"
-                        type="time"
-                        placeholder="image"
-                        value={formData.time}
                         onChange={handleChange}
                         marginBottom={4}
                          fontSize={"16px"} className='justify-center  items-center'

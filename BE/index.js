@@ -12,7 +12,7 @@ app.use("/event",EventRouter)
 app.listen(3000,async()=>{
     try{
         await connection;
- console.log("Connected")
+    console.log("Connected")
     }
     catch(err){
         console.log(err.message)

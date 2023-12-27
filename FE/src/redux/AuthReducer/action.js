@@ -19,6 +19,8 @@ export const Login=(userData)=>async(dispatch)=>{
     await axios.post('https://trackster.onrender.com/user/login',userData)
     .then((res)=>{
         dispatch({type:LOGIN_SUCCESS,payload:res})
+        localStorage.setItem('token',(res.data.token))
+        console.log(res.data.token,"1")
     })
     .catch((err)=>{
         dispatch({type:LOGIN_ERROR})

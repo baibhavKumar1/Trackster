@@ -6,7 +6,8 @@ const attendeeSchema= mongoose.Schema(
         name:String,
         hostingEvent:[String],
         email:String,
-        password:String
+        pass:String,
+        userId:String
     },{
         versionKey:false
     }

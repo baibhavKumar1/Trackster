@@ -23,7 +23,7 @@ export const SignupModal = ({ onOpens, LetClose }) => {
   };
 
   const handleSignup = () => {
-    console.log(formData)
+    //console.log(formData)
     dispatch(Register(formData))
     setFormData({
       firstName: '',

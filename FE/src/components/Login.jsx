@@ -9,6 +9,7 @@ import { PiEyeBold, PiEyeClosedBold, } from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Login } from '../redux/AuthReducer/action';
 import { SignupModal } from './Signup';
+import { NavLink } from 'react-router-dom';
 
 const LoginMenu = () => {
     const [SignOpen, setSignOpen] = useState(false);
@@ -22,7 +23,7 @@ const LoginMenu = () => {
     const [email, setUsername] = useState("");
     const dispatch = useDispatch();
     const [pass, setPassword] = useState("");
-
+    let token = localStorage.getItem('token');
     let { isAuth, name } = useSelector((store) => store.Reducer);
 
     function HandleLogout() {
@@ -30,7 +31,7 @@ const LoginMenu = () => {
     }
 
     const handleSubmit = () => {
-        dispatch(Login({ email, pass }));
+         dispatch(Login({ email, pass }));
         onClose()
     }
 
@@ -45,14 +46,14 @@ const LoginMenu = () => {
                     </Button>
                 </PopoverTrigger>
                 {isAuth ?
-                    <PopoverContent w={"100%"} border={"none"} m="5px" p="10px" borderRadius={"15px"}>
+                    <PopoverContent w={"100%"} m="5px" p="10px" borderRadius={"15px"}>
                         <PopoverArrow />
                         <PopoverCloseButton />
                         <PopoverHeader border="none" fontWeight={"bold"} color="#2b3954"
                             fontSize="22">Welcome,<Text textTransform={"capitalize"}>{name}</Text>
                         </PopoverHeader>
                         <PopoverBody >
-                            <Box><Text>My Events</Text></Box>
+                            <NavLink to='/admin' className='mb-2'><Box className='border'><Text>My Events</Text></Box></NavLink>
                             <Button colorScheme="white" fontSize="16" w="100%" fontWeight="400" bg="#2b3954" _hover={{ bgColor: "#e89f22" }} letterSpacing={"1px"} onClick={HandleLogout}>LOGOUT
                             </Button>
                         </PopoverBody>

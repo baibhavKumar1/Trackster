@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
         if (token) {
             let decoded = jwt.verify(token, "token");
             req.body.userID = decoded.userID;
-            return next();
+            return next(); 
         }
         else {
             return res.status(400).send("Unauthorized");

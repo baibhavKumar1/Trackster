@@ -5,40 +5,47 @@ const auth = require('../Middleware/auth.middleware');
 const UserModel = require('../Model/user.model');
 const EventRouter = express.Router();
 
-const findUserById = async (userId) => {
-  return await UserModel.findById(userId);
-};
-
-const findEventById = async (eventId) => {
-  return await EventModel.findById(eventId);
-};
 
 const addEventToAttendee = async (attendeeId, eventId) => {
-  const user = await findUserById(attendeeId);
-  const { name, email } = user;
-  const attendee = await AttendeeModel.findOne({ name, email });
-  const eventdata = await findEventById(eventId);
+  try {
+    const attendee = await AttendeeModel.findOne({ userId: attendeeId });
+    const event = await EventModel.findById(eventId);
 
-  if (attendee && !attendee.event.includes(eventId) && attendeeId!==eventdata.hostId) {
-    attendee.event.push(eventId);
-    await attendee.save();
-    eventdata.attendees.push(attendeeId);
-    await eventdata.save();
-    return ("event added to attendee")
-  } else if(attendee && attendee.event.includes(eventId) && eventdata.attendees.includes(attendeeId)) {
-    return ('attendee already added')
-  }else{
-    await createAttendeeFromUser(attendeeId, eventId);
+    if (attendee) {
+      if (attendeeId === event.hostId) {
+        return 'User is the host of the event';
+      }
+
+      if (attendee.event.includes(eventId)) {
+        return 'Attendee already added to the event';
+      }
+      else {
+        attendee.event.push(eventId);
+        await attendee.save();
+
+        event.attendees.push(attendeeId);
+        await event.save();
+
+        return 'Event added to attendee successfully';
+      }
+    }else{
+      const attendee = await createAttendeeFromUser(attendeeId, eventId);
+      return attendee
+    }
+
+  } catch (error) {
+    console.error(error);
+    throw new Error('Internal Server Error');
   }
 };
 
 const createAttendeeFromUser = async (userId, eventId) => {
-  const user = await findUserById(userId);
-  const event = await findEventById(eventId);
+  const user = await UserModel.findById(userId);
+  const event = await EventModel.findById(eventId);
   if (user) {
     const { name, email, pass } = user;
     const newAttendee = new AttendeeModel({
-      name, email, pass, event: [eventId]
+      name, email, pass, event: [eventId], userId
     });
     await newAttendee.save();
     event.attendees.push(userId);
@@ -49,17 +56,15 @@ const createAttendeeFromUser = async (userId, eventId) => {
 
 const addEventToHost = async (hostId, eventId) => {
   try {
-    const event = await EventModel.findById( eventId )
     const user = await UserModel.findById(hostId)
     const { name, email } = user;
     const host = await AttendeeModel.findOne({ name, email });
-    if (host && (host.hostingEvent.includes(eventId) || event.attendees.includes({ hostId }))) {
-      return ('host already registered')
-    }
-    else if (host && (!host.hostingEvent.includes(eventId) || event.attendees.includes({ hostId }))) {
+    if (host) {
       host.hostingEvent.push(eventId);
       await host.save();
-    } else {
+      return { host }
+    }
+    else {
       await createHostFromUser(hostId, eventId);
     }
   } catch (e) {
@@ -68,32 +73,74 @@ const addEventToHost = async (hostId, eventId) => {
 };
 
 const createHostFromUser = async (userId, eventId) => {
-  const user = await findUserById(userId);
+  const user = await UserModel.findById(userId);
 
   if (user) {
     const { name, email, pass } = user;
-    const newHost = new AttendeeModel({
-      name, email, pass, hostingEvent: [eventId]
+    const host = new AttendeeModel({
+      name, email, pass, hostingEvent: [eventId], userId
     });
-    await newHost.save();
-    return ('host created')
+    await host.save();
+    return (host)
+  }
+};
+
+const removeAttendeeFromEvent = async (attendeeId, eventId) => {
+  try {
+    const attendee = await AttendeeModel.findOne({ userId: attendeeId });
+    const eventData = await EventModel.findById(eventId);
+
+    if (!attendee || !eventData) {
+      return "Attendee or event not found";
+    }
+    attendee.event = attendee.event.filter(event => event.toString() !== eventId);
+    await attendee.save();
+
+    eventData.attendees = eventData.attendees.filter(id => id.toString() !== attendeeId);
+    await eventData.save();
+
+    return "Attendee removed from event";
+  } catch (error) {
+    console.error(error);
+    return "Error removing attendee from event";
   }
 };
 
 EventRouter.use(auth);
 
 EventRouter.get("/", async (req, res) => {
-  try{
+  try {
     const events = await EventModel.find();
     res.status(200).send(events)
-  }catch(err){
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+});
+
+EventRouter.get("/hostingEvent", async (req, res) => {
+  try {
+    const { userID } = req.body;
+    const events = await EventModel.find({ hostId: userID });
+    res.status(200).send(events)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+});
+
+EventRouter.get("/attendingEvent", async (req, res) => {
+  try {
+    const { userID } = req.body;
+    const attendee = await AttendeeModel.findOne({ userId: userID })
+    const events = await EventModel.find({ _id: { $in: attendee.event } });
+    res.status(200).send(events)
+  } catch (err) {
     res.status(500).send(err.message)
   }
 });
 
 EventRouter.post('/create', async (req, res) => {
   try {
-    const { name, venue, description,date, time, image, userID } = req.body;
+    const { name, venue, description, date, image, userID } = req.body;
     const exist = await EventModel.findOne({ name, venue });
 
     if (exist) {
@@ -101,16 +148,55 @@ EventRouter.post('/create', async (req, res) => {
     }
 
     const newEvent = new EventModel({
-      name, venue, description,date, time, image, hostId: userID
+      name, venue, description, date, image, hostId: userID
     });
 
     await newEvent.save();
     console.log(newEvent._id)
     const data = await addEventToHost(userID, newEvent._id);
-    res.send(data);
+    res.status(200).json({ data, newEvent });
   } catch (e) {
     console.error(e);
     res.status(500).send("Internal Server Error");
+  }
+});
+EventRouter.patch("/edit/:id", auth, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const event = await EventModel.findById(id);
+    if (event.hostId === req.body.userID) {
+      const newevent = await EventModel.findByIdAndUpdate(
+        id,
+        req.body, { new: true }
+      );
+      res.status(200).json({ message: "event updated successfully", newevent });
+    }
+    else {
+      res.status(400).send("unauthorized")
+    }
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+EventRouter.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const event = await EventModel.findById(id);
+    if (event.hostId !== req.body.userId) {
+      res.status(401).json({ message: "Not Authorized" });
+    } else {
+      const newEvent = await EventModel.findByIdAndDelete(id);
+      const host = await AttendeeModel.findOne({ userId: req.body.userId });
+      if (host) {
+        host.hostingEvent = host.hostingEvent.filter(eventId => eventId.toString() !== id);
+        await host.save();
+      }
+      res.status(200).json({ message: "Event deleted successfully", host });
+    }
+  } catch (error) {
+    res.status(500).json({ message: err.message });
   }
 });
 
@@ -118,6 +204,16 @@ EventRouter.post('/addAttendee', async (req, res) => {
   try {
     const { userID, eventId } = req.body;
     const data = await addEventToAttendee(userID, eventId);
+    res.status(200).send(data);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Internal Server Error");
+  }
+});
+EventRouter.post('/removeAttendee', async (req, res) => {
+  try {
+    const { userID, eventId } = req.body;
+    const data = await removeAttendeeFromEvent(userID, eventId);
     res.status(200).send(data);
   } catch (e) {
     console.error(e);
