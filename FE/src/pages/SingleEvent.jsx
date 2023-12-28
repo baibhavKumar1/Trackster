@@ -12,18 +12,24 @@ import { MdPeople } from "react-icons/md"
 import { IoIosPeople } from 'react-icons/io'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react"
-import {GetSingleEvent} from '../redux/EventReducer/action.js'
+import {AddAttendee, GetSingleEvent} from '../redux/EventReducer/action.js'
 const SingleEvent = () => {
     const { id } = useParams()
     //console.log(id)
+    const eventId= id;
     const dispatch= useDispatch();
     let { isAuth } = useSelector((store) => store.Reducer);
     const event = useSelector((store) => store.EventReducer.singleEvent);
     console.log(event)
     let token = localStorage.getItem('token');
+    
     useEffect(() => {
         dispatch(GetSingleEvent({id,token}))
     }, [dispatch, token]);
+    const Add=()=>{
+        console.log("yes")
+        dispatch(AddAttendee({eventId,token}))
+    }
     function Getday(event) {
         const dateObject = new Date(event.date);
         const options = { weekday: 'long', month: 'long', day: 'numeric' };
@@ -61,7 +67,7 @@ const SingleEvent = () => {
                                 <Text className="border w-max border-gray-800 px-1 rounded-lg">{event.description}</Text>
                             </div>
                             <div className="flex flex-col">
-                                <button className="bg-rose-400 p-2 rounded-xl self-end">RSVP</button>
+                                <button className="bg-rose-400 p-2 rounded-xl self-end" onClick={Add}>RSVP</button>
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="border rounded-lg h-max">
                                         <Text className="bg-gray-400 rounded-lg text-xs p-0.5 px-2">JAN</Text>

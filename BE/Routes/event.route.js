@@ -196,7 +196,7 @@ EventRouter.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const event = await EventModel.findById(id);
-    if (event.hostId !== req.body.userId) {
+    if (event.hostId !== req.body.userID) {
       res.status(401).json({ message: "Not Authorized" });
     } else {
       const newEvent = await EventModel.findByIdAndDelete(id);
