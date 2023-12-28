@@ -117,6 +117,16 @@ EventRouter.get("/", async (req, res) => {
   }
 });
 
+EventRouter.get("/:id", async (req, res) => {
+  const {id} = req.params;
+  try {
+    const events = await EventModel.findById(id);
+    res.status(200).send(events)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+});
+
 EventRouter.get("/hostingEvent", async (req, res) => {
   try {
     const { userID } = req.body;
