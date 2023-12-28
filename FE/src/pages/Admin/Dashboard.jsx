@@ -3,10 +3,10 @@ import AdminSidebar from "./AdminSidebar"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import test from '@date/today'
-import { DeleteEvent, GetHostingEvent } from "../../redux/EventReducer/action"
+import { DeleteEvent, GetEvent, GetHostingEvent } from "../../redux/EventReducer/action"
 import ExploreCard from "../../components/ExploreCard"
 import TopBar from "../../components/TopBar"
-import { Eventcreator } from "../../components/EventEditor"
+import { EventEditor } from "../../components/EventEditor"
 const Dashboard = () => {
   const dispatch = useDispatch();
   let { isAuth } = useSelector((store) => store.Reducer);
@@ -22,6 +22,7 @@ const Dashboard = () => {
   const handleDelete=(id)=>{
     console.log(id)
     dispatch(DeleteEvent({id,token}))
+    dispatch(GetEvent(token))
   }
   function Timenow(date) {
     const previous = new Date(date);
@@ -44,9 +45,9 @@ const Dashboard = () => {
                 <div key={item._id} >
                   <ExploreCard item={item} />
                   <div className="flex justify-around">
-                    <button className="bg-red-500 p-2 rounded-lg text-white" onClick={handleDelete(item._id)}>Delete Event</button>
+                    <button className="bg-red-500 p-2 rounded-lg text-white" onClick={()=>{handleDelete(item._id)}}>Delete Event</button>
                     <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
-                    {SignOpen && <Eventcreator onOpens={SignOpen} LetClose={SignClose} />}
+                    {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} id={item._id}/>}
                   </div>
                 </div>
               )

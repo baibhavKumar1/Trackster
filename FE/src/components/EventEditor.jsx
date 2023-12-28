@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import { Button, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateEvent } from '../redux/EventReducer/action';
+import { EditEvent } from '../redux/EventReducer/action';
 
-export const Eventcreator = ({ onOpens, LetClose }) => {
+export const EventEditor = ({ onOpens, LetClose ,id}) => {
     const token = useSelector((store)=>store.Reducer.token)
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
@@ -13,7 +13,8 @@ export const Eventcreator = ({ onOpens, LetClose }) => {
         description: '',
         date: '',
         image: '',
-        token:token
+        token:token,
+        id:id
     });
 
     const handleChange = (e) => {
@@ -27,7 +28,7 @@ export const Eventcreator = ({ onOpens, LetClose }) => {
     const handleSignup = (e) => {
         e.preventDefault()
         //console.log(formData)
-        dispatch(CreateEvent(formData))
+        dispatch(EditEvent(formData))
         setFormData({
             name: '',
             venue: '',

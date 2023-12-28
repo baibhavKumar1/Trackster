@@ -76,7 +76,7 @@ export const CreateEvent = (data) => async (dispatch) => {
 }
 export const EditEvent = (data) => async (dispatch) => {
     dispatch({ type: CREATE_EVENT_REQUEST })
-    await axios.patch('https://trackster.onrender.com/event/create', data,{
+    await axios.patch(`https://trackster.onrender.com/event/edit/${data.id}`, data,{
         headers:{
             Authorization:`Bearer ${data.token}`
         }
