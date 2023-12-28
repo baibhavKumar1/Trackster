@@ -15,11 +15,11 @@ export const GetEvent= (token)=>(dispatch)=>{
         console.log(err)
     })
 }
-export const GetSingleEvent= (token)=>(dispatch)=>{ 
+export const GetSingleEvent= (data)=>(dispatch)=>{ 
     dispatch({type:GET_EVENT_REQUEST})
-    axios.get('https://trackster.onrender.com/event',{
+    axios.get(`https://trackster.onrender.com/event/singleEvent/${data.id}`,{
         headers:{
-            Authorization:`Bearer ${token}`
+            Authorization:`Bearer ${data.token}`
         }
     }).then((res)=>{ 
         dispatch({type:GET_EVENT_SUCCESS,payload:res})

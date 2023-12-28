@@ -111,13 +111,14 @@ EventRouter.use(auth);
 EventRouter.get("/", async (req, res) => {
   try {
     const events = await EventModel.find();
+    console.log(req.body.userID)
     res.status(200).send(events)
   } catch (err) {
     res.status(500).send(err.message)
   }
 });
 
-EventRouter.get("/:id", async (req, res) => {
+EventRouter.get("/singleEvent/:id", async (req, res) => {
   const {id} = req.params;
   try {
     const events = await EventModel.findById(id);
@@ -130,6 +131,7 @@ EventRouter.get("/:id", async (req, res) => {
 EventRouter.get("/hostingEvent", async (req, res) => {
   try {
     const { userID } = req.body;
+    console.log(req.body.userID)
     const events = await EventModel.find({ hostId: userID });
     res.status(200).send(events)
   } catch (err) {
