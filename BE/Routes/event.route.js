@@ -106,7 +106,7 @@ const removeAttendeeFromEvent = async (attendeeId, eventId) => {
   }
 };
 
-// EventRouter.use(auth);
+ EventRouter.use(auth);
 
 EventRouter.get("/", async (req, res) => {
   try {
@@ -147,9 +147,21 @@ EventRouter.get("/hostingEvent", async (req, res) => {
 EventRouter.get("/attendingEvent", async (req, res) => {
   try {
     const { userID } = req.body;
+    console.log(userID)
     const attendee = await AttendeeModel.findOne({ userId: userID })
+    if (attendee){
     const events = await EventModel.find({ _id: { $in: attendee.event } });
+    if(events){
+      console.log(events)
     res.status(200).send(events)
+    }
+    else{
+      res.status(400).send('no attending event found')
+    }
+  }else {
+    res.status(400).send("attendee not found")
+  }
+    
   } catch (err) {
     res.status(500).send(err.message)
   }

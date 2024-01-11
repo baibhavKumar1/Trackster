@@ -20,7 +20,9 @@ const SingleEvent = () => {
     const dispatch= useDispatch();
     useEffect(() => { 
         console.log(id,token)
-        dispatch(GetSingleEvent({id,token}))
+        if(token){
+            dispatch(GetSingleEvent({id,token}))
+        }
     }, [dispatch, token,id]);
     
     let { isAuth } = useSelector((store) => store.AuthReducer);
@@ -32,24 +34,24 @@ const SingleEvent = () => {
         //console.log("yes")
         dispatch(AddAttendee({id,token}))
     }
-    function Getday(event) {
-        const dateObject = new Date(event.date);
-        //console.log(dateObject)
-        const options = { weekday: 'long', month: 'short', day: 'numeric' };
-        const dateFormatter = new Intl.DateTimeFormat('en-US', options);
-        const formattedDate = dateFormatter.format(dateObject); 
-        //console.log(dateObject)
-        console.log(formattedDate)
-        return formattedDate 
+    // function Getday(event) {
+    //     const dateObject = new Date(event.date);
+    //     //console.log(dateObject)
+    //     const options = { weekday: 'long', month: 'short', day: 'numeric' };
+    //     const dateFormatter = new Intl.DateTimeFormat('en-US', options);
+    //     const formattedDate = dateFormatter.format(dateObject); 
+    //     //console.log(dateObject)
+    //     console.log(formattedDate)
+    //     return formattedDate 
     
-    }
-    const date= Getday(event)
-    const DisplayMonthAndDate = (date) => {
-        const a = date.split(" ");
-        return a
-      };
-    const [_,month,day] = DisplayMonthAndDate(date)
-      console.log(_,day,month)
+    // }
+    // const date= Getday(event)
+    // const DisplayMonthAndDate = (date) => {
+    //     const a = date.split(" ");
+    //     return a
+    //   };
+    // const [_,month,day] =  DisplayMonthAndDate(date)
+    //   console.log(_,day,month)
     return (
         <div className="flex h-full justify-between relative">
             <Sidebar />
@@ -80,12 +82,12 @@ const SingleEvent = () => {
                                 <button className="bg-rose-400 p-2 rounded-xl self-end" onClick={Add}>RSVP</button>
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="border rounded-lg h-max">
-                                        <Text className="bg-gray-400 rounded-lg text-xs p-0.5 px-2">{month}</Text>
+                                        <Text className="bg-gray-400 rounded-lg text-xs p-0.5 px-2">month</Text>
 
-                                        <Text className="rounded-lg text-center bg-white text-xs p-0.5">{day}</Text>
+                                        <Text className="rounded-lg text-center bg-white text-xs p-0.5">day</Text>
                                     </div>
                                     <div>
-                                        <Text className="font-semibold">{date}</Text>
+                                        <Text className="font-semibold">date</Text>
                                         <Text>1:31 AM to 2:31 AM</Text>
                                     </div>
                                 </div>

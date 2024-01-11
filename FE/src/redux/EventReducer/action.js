@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const GetEvent= (token)=>(dispatch)=>{ 
     dispatch({type:GET_EVENT_REQUEST})
-    axios.get('http://localhost:3000/event',{
+    axios.get('https://trackster.onrender.com/event',{
         headers:{
             Authorization:`Bearer ${token}`
         }
@@ -19,7 +19,7 @@ export const GetEvent= (token)=>(dispatch)=>{
 export const GetSingleEvent= ({id,token})=>(dispatch)=>{  
     dispatch({type:GET_SINGLEEVENT_REQUEST}) 
     console.log(id)
-    axios.get(`http://localhost:3000/event/singleEvent/${id}`,{
+    axios.get(`https://trackster.onrender.com/event/singleEvent/${id}`,{
         headers:{
             Authorization:`Bearer ${token}`
         }
@@ -33,7 +33,7 @@ export const GetSingleEvent= ({id,token})=>(dispatch)=>{
 }
 export const GetHostingEvent= (token)=>(dispatch)=>{ 
     dispatch({type:GET_HOSTINGEVENT_REQUEST})
-    axios.get('http://localhost:3000/event/hostingEvent',{
+    axios.get('https://trackster.onrender.com/event/hostingEvent',{
         headers:{
             Authorization:`Bearer ${token}`
         }
@@ -47,21 +47,21 @@ export const GetHostingEvent= (token)=>(dispatch)=>{
 }
 export const GetAttendingEvent= (token)=>(dispatch)=>{ 
     dispatch({type:GET_ATTENDINGEVENT_REQUEST})
-    axios.get('http://localhost:3000/event/attendingEvent',{
+    axios.get('https://trackster.onrender.com/event/attendingEvent',{
         headers:{
             Authorization:`Bearer ${token}`
         }
     }).then((res)=>{ 
         dispatch({type:GET_ATTENDINGEVENT_SUCCESS,payload:res})
-        ////console.log(res)
+        console.log(res)
     }).catch((err)=>{
         dispatch({type:GET_ATTENDINGEVENT_ERROR})
-        //console.log(err)
+        console.log(err)
     })
 }
 export const CreateEvent = (data) => async (dispatch) => {
     dispatch({ type: CREATE_EVENT_REQUEST })
-    await axios.post('http://localhost:3000/event/create', data,{
+    await axios.post('https://trackster.onrender.com/event/create', data,{
         headers:{
             Authorization:`Bearer ${data.token}`
         }
@@ -78,7 +78,7 @@ export const CreateEvent = (data) => async (dispatch) => {
 }
 export const EditEvent = (data) => async (dispatch) => {
     dispatch({ type: CREATE_EVENT_REQUEST })
-    await axios.patch(`http://localhost:3000/event/edit/${data.id}`, data,{
+    await axios.patch(`https://trackster.onrender.com/event/edit/${data.id}`, data,{
         headers:{
             Authorization:`Bearer ${data.token}`
         }
@@ -95,7 +95,7 @@ export const EditEvent = (data) => async (dispatch) => {
 }
 export const DeleteEvent = (data) => async (dispatch) => {
     dispatch({ type: DELETE_EVENT_REQUEST })
-    await axios.delete(`http://localhost:3000/event/delete/${data.id}`, {
+    await axios.delete(`https://trackster.onrender.com/event/delete/${data.id}`, {
         headers:{
             Authorization:`Bearer ${data.token}`
         }
@@ -114,7 +114,7 @@ export const DeleteEvent = (data) => async (dispatch) => {
 export const AddAttendee = ({id,token}) => async (dispatch) => {
     dispatch({ type: ADD_ATTENDEE_REQUEST })
     console.log(id,token)
-    await axios.post('http://localhost:3000/event/addAttendee', {id},{
+    await axios.post('https://trackster.onrender.com/event/addAttendee', {id},{
         headers:{
             Authorization:`Bearer ${token}`
         } 
@@ -131,7 +131,7 @@ export const AddAttendee = ({id,token}) => async (dispatch) => {
 }
 export const RemoveAttendee = (data) => async (dispatch) => {
     dispatch({ type: REMOVE_ATTENDEE_REQUEST })
-    await axios.post('http://localhost:3000/event/removeAttendee', data,{
+    await axios.post('https://trackster.onrender.com/event/removeAttendee', data,{
         headers:{
             Authorization:`Bearer ${data.token}`
         } 
