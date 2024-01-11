@@ -106,12 +106,12 @@ const removeAttendeeFromEvent = async (attendeeId, eventId) => {
   }
 };
 
-EventRouter.use(auth);
+// EventRouter.use(auth);
 
 EventRouter.get("/", async (req, res) => {
   try {
     const events = await EventModel.find();
-    
+    //console.log(req.body.userID)
     res.status(200).send(events)
   } catch (err) {
     res.status(500).send(err.message)
