@@ -11,14 +11,14 @@ import ExploreCard from '../components/ExploreCard';
 import test from '@date/today'
 const Explore = () => {
     const dispatch = useDispatch();
-    let { isAuth } = useSelector((store) => store.Reducer);
+    let { isAuth } = useSelector((store) => store.AuthReducer);
     const events = useSelector((store) => store.EventReducer.events);
     let token = localStorage.getItem('token');
     useEffect(() => {
         dispatch(GetEvent(token))
     }, [dispatch, token]);
 
-    console.log(events)
+    //console.log(events)
 
     const [SignOpen, setSignOpen] = useState(false);
     function SignClose() {
@@ -72,21 +72,21 @@ const Explore = () => {
                                 LetClose={SignClose} />}
                         </div>
                     </div>
-                    <div className='overflow-y-hidden' >
+                    {isAuth && filteredEvents.length>0 && <div className='overflow-y-hidden' >
                         <div className='flex items-center gap-1 m-2'>
-                            <Text>Live Now</Text>
+                            <Text>Happening Today</Text>
                             <div className='w-8'>
                                 <iframe className='w-8 h-8' src="https://lottie.host/embed/426113a8-14ac-4148-bd46-744961283939/a5dsQamynl.json"></iframe>
                             </div>
                         </div>
                         <div className='flex gap-5 overflow-x-auto w-[68em]'>
-                            {isAuth && filteredEvents.map((item) => {
+                            {filteredEvents.map((item) => {
                                 return (
                                     <ExploreCard key={item._id} item={item} />
                                 )
                             })}
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

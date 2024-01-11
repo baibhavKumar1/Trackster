@@ -15,31 +15,41 @@ import { useEffect } from "react"
 import {AddAttendee, GetSingleEvent} from '../redux/EventReducer/action.js'
 const SingleEvent = () => {
     const { id } = useParams()
-    //console.log(id)
-    const eventId= id;
+    console.log(id)
+    let token = useSelector((store) => store.AuthReducer.token)||localStorage.getItem('token'); 
     const dispatch= useDispatch();
-    let { isAuth } = useSelector((store) => store.Reducer);
+    useEffect(() => { 
+        console.log(id,token)
+        dispatch(GetSingleEvent({id,token}))
+    }, [dispatch, token,id]);
+    
+    let { isAuth } = useSelector((store) => store.AuthReducer);
     const event = useSelector((store) => store.EventReducer.singleEvent);
     console.log(event)
-    let token = localStorage.getItem('token');
-    
-    useEffect(() => {
-        dispatch(GetSingleEvent({id,token}))
-    }, [dispatch, token]);
+     
+     
     const Add=()=>{
-        console.log("yes")
-        dispatch(AddAttendee({eventId,token}))
+        //console.log("yes")
+        dispatch(AddAttendee({id,token}))
     }
     function Getday(event) {
         const dateObject = new Date(event.date);
-        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        //console.log(dateObject)
+        const options = { weekday: 'long', month: 'short', day: 'numeric' };
         const dateFormatter = new Intl.DateTimeFormat('en-US', options);
         const formattedDate = dateFormatter.format(dateObject); 
-        return formattedDate
-        //console.log(formattedDate)
+        //console.log(dateObject)
+        console.log(formattedDate)
+        return formattedDate 
+    
     }
     const date= Getday(event)
-
+    const DisplayMonthAndDate = (date) => {
+        const a = date.split(" ");
+        return a
+      };
+    const [_,month,day] = DisplayMonthAndDate(date)
+      console.log(_,day,month)
     return (
         <div className="flex h-full justify-between relative">
             <Sidebar />
@@ -52,13 +62,13 @@ const SingleEvent = () => {
                         </InputGroup>
                     </div>
                     <div className="flex gap-4 items-center">
-                        <PiBellSimple size="2em" className="rounded-full bg-slate-200 p-2" />
+                        <PiBellSimple size="2em" className="rounded-full bg-slate-200 p-2" /> 
                         <LoginMenu />
                     </div>
-                </div>
+                </div> 
                 <Divider />
                 <div className=" m-4">
-                {isAuth && <>
+                {isAuth && event.name && <>
                     <div className="bg-gray-300 rounded-xl p-3">
                         <img src={event.image} alt="img" className="h-[500px] w-full rounded-xl" />
                         <div className="flex justify-between m-2">
@@ -70,9 +80,9 @@ const SingleEvent = () => {
                                 <button className="bg-rose-400 p-2 rounded-xl self-end" onClick={Add}>RSVP</button>
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="border rounded-lg h-max">
-                                        <Text className="bg-gray-400 rounded-lg text-xs p-0.5 px-2">JAN</Text>
+                                        <Text className="bg-gray-400 rounded-lg text-xs p-0.5 px-2">{month}</Text>
 
-                                        <Text className="rounded-lg text-center bg-white text-xs p-0.5">1</Text>
+                                        <Text className="rounded-lg text-center bg-white text-xs p-0.5">{day}</Text>
                                     </div>
                                     <div>
                                         <Text className="font-semibold">{date}</Text>
@@ -116,16 +126,16 @@ const SingleEvent = () => {
                                 <IoIosPeople />
                                 <Text>{event.attendees.length} Attendees</Text>
                             </div>
-                            <div className="bg-white m-2 rounded-xl p-1">{event.attendees[0]}</div>
+                            <div className="bg-white m-2 rounded-xl p-1">{event.attendees.length>0 && event.attendees[0]}</div>
                         </div>
                     </div>
                     </>
-                }
+                } 
                 </div>
 
             </div>
         </div>
-    )
+    ) 
 }
 
 export default SingleEvent

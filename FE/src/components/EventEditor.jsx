@@ -4,28 +4,30 @@ import { Button, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFoo
 import { useDispatch, useSelector } from 'react-redux';
 import { EditEvent } from '../redux/EventReducer/action';
 
-export const EventEditor = ({ onOpens, LetClose ,id}) => {
-    const token = useSelector((store)=>store.Reducer.token)
+export const EventEditor = ({ onOpens, LetClose ,item}) => {
+    const {name,venue,description,date,image,_id}=item;
+    const token = useSelector((store)=>store.AuthReducer.token)
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
-        name: '',
-        venue: '',
-        description: '',
-        date: '',
-        image: '',
+        name,
+        venue,
+        description,
+        date,
+        image,
         token:token,
-        id:id
+        id:_id
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: value !== '' ? value : prevData[name], // Set the previous value if the new value is empty
         }));
     };
+    
 
-    const handleSignup = (e) => {
+    const handleEdit = (e) => {
         e.preventDefault()
         //console.log(formData)
         dispatch(EditEvent(formData))
@@ -85,7 +87,7 @@ export const EventEditor = ({ onOpens, LetClose ,id}) => {
                     />
                     <Input
                         name="date"
-                        type="datetime-local"
+                        type="date"
                         placeholder="Date"
                         value={formData.date}
                         onChange={handleChange}
@@ -98,7 +100,7 @@ export const EventEditor = ({ onOpens, LetClose ,id}) => {
                 <ModalFooter>
 
                     <Button
-                        colorScheme="white" fontSize="16" w="100%" fontWeight="400" bg="#2b3954" _hover={{ bgColor: "#e89f22" }} letterSpacing={"1px"} onClick={handleSignup}>
+                        colorScheme="white" fontSize="16" w="100%" fontWeight="400" bg="#2b3954" _hover={{ bgColor: "#e89f22" }} letterSpacing={"1px"} onClick={handleEdit}>
                         EDIT EVENT
                     </Button>
                 </ModalFooter>

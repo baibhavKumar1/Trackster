@@ -9,7 +9,7 @@ const init = {
     data:[]
 }
 
-export const Reducer = (state=init,{type,payload})=>{
+export const reducer = (state=init,{type,payload})=>{
    switch(type){
     case REGISTER_REQUEST : return {...state, isLoading:true}
     case REGISTER_SUCCESS: return {...state}

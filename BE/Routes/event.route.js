@@ -10,7 +10,7 @@ const addEventToAttendee = async (attendeeId, eventId) => {
   try {
     const attendee = await AttendeeModel.findOne({ userId: attendeeId });
     const event = await EventModel.findById(eventId);
-
+    console.log(event) 
     if (attendee) {
       if (attendeeId === event.hostId) {
         return 'User is the host of the event';
@@ -111,7 +111,7 @@ EventRouter.use(auth);
 EventRouter.get("/", async (req, res) => {
   try {
     const events = await EventModel.find();
-    console.log(req.body.userID)
+    
     res.status(200).send(events)
   } catch (err) {
     res.status(500).send(err.message)
@@ -120,9 +120,14 @@ EventRouter.get("/", async (req, res) => {
 
 EventRouter.get("/singleEvent/:id", async (req, res) => {
   const {id} = req.params;
+   console.log(id)
   try {
     const events = await EventModel.findById(id);
-    res.status(200).send(events)
+    if(events){
+    res.status(200).send(events)} 
+    else{
+      res.status(400).send('event not found')
+    }
   } catch (err) {
     res.status(500).send(err.message)
   }
@@ -207,15 +212,17 @@ EventRouter.delete("/delete/:id", async (req, res) => {
       }
       res.status(200).json({ message: "Event deleted successfully", host });
     }
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
 EventRouter.post('/addAttendee', async (req, res) => {
   try {
-    const { userID, eventId } = req.body;
-    const data = await addEventToAttendee(userID, eventId);
+    console.log(req.body)
+    const { userID, id } = req.body;
+    
+    const data = await addEventToAttendee(userID, id);
     res.status(200).send(data);
   } catch (e) {
     console.error(e);

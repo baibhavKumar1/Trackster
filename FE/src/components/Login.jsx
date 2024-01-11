@@ -23,8 +23,8 @@ const LoginMenu = () => {
     const [email, setUsername] = useState("");
     const dispatch = useDispatch();
     const [pass, setPassword] = useState("");
-    let token = localStorage.getItem('token');
-    let { isAuth, name } = useSelector((store) => store.Reducer);
+    // let {token} = useSelector((store) => store.AuthReducer)||localStorage.getItem('token');
+    let { isAuth, name } = useSelector((store) => store.AuthReducer);
 
     function HandleLogout() {
         //dispatch(LogoutStoringUserDatainLS);

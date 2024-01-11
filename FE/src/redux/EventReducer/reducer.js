@@ -10,7 +10,7 @@ const init= {
     singleEvent:{}
 }
 
-export const EventReducer = (state=init, {type,payload})=>{
+export const reducer = (state=init, {type,payload})=>{
   switch (type){
     case CREATE_EVENT_REQUEST: return {...state, isLoading:true}
     case CREATE_EVENT_SUCCESS: return {...state,isLoading:false, message:payload}

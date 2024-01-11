@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CreateEvent } from '../redux/EventReducer/action';
 
 export const Eventcreator = ({ onOpens, LetClose }) => {
-    const token = useSelector((store)=>store.Reducer.token)
+    const token = useSelector((store)=>store.AuthReducer.token)
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         name: '',
@@ -84,7 +84,7 @@ export const Eventcreator = ({ onOpens, LetClose }) => {
                     />
                     <Input
                         name="date"
-                        type="datetime-local"
+                        type="date"
                         placeholder="Date"
                         value={formData.date}
                         onChange={handleChange}

@@ -8,9 +8,9 @@ import test from '@date/today'
 import { GetAttendingEvent } from "../redux/EventReducer/action";
 const Events = () => {
     const dispatch = useDispatch();
-    let { isAuth } = useSelector((store) => store.Reducer);
+    let { isAuth } = useSelector((store) => store.AuthReducer);
     const events = useSelector((store) => store.EventReducer.attendingEvents);
-    console.log(events)
+    //console.log(events)
     let token = localStorage.getItem('token');
     useEffect(() => {
         dispatch(GetAttendingEvent(token))
