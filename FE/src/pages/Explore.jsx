@@ -1,14 +1,12 @@
-import { Text, Input, InputGroup, InputRightElement, Divider } from '@chakra-ui/react'
+import { Text,  Divider } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
-import { CiSearch } from 'react-icons/ci'
-import { PiBellSimple } from 'react-icons/pi'
 import { Eventcreator } from '../components/Eventcreator';
-import LoginMenu from '../components/Login';
 import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetEvent } from '../redux/EventReducer/action';
 import ExploreCard from '../components/ExploreCard';
 import test from '@date/today'
+import TopBar from '../components/TopBar';
 const Explore = () => {
     const dispatch = useDispatch();
     let { isAuth } = useSelector((store) => store.AuthReducer);
@@ -32,19 +30,9 @@ const Explore = () => {
     return (
         <div className="flex h-full justify-between relative">
             <Sidebar />
+            <Divider/>
             <div className=" absolute right-0 w-5/6">
-                <div className="my-2 flex items-center justify-between mx-4">
-                    <div>
-                        <InputGroup className="m-1 ml-4 " size="md">
-                            <Input placeholder="Search.." className="" />
-                            <InputRightElement><CiSearch /></InputRightElement>
-                        </InputGroup>
-                    </div>
-                    <div className="flex gap-4 items-center">
-                        <PiBellSimple size="2em" className="rounded-full bg-slate-200 p-2" />
-                        <LoginMenu />
-                    </div>
-                </div>
+                <TopBar/>
                 <Divider />
                 <div className="overflow-auto">
                     <div className=' m-2 overflow-y-hidden'>
@@ -63,7 +51,7 @@ const Explore = () => {
                         </div>
                         <div className='w-1/2 p-2 space-y-2'>
                             <Text className='font-semibold text-xl'>Create Events on <b className='text-orange-500'>Trackster</b></Text>
-                            <Text>Start organizing your events an calendar on directly on Nostr. Seamlessly collect payments and engage with your community.</Text>
+                            <Text>Start organizing your events an calendar on directly on Trackster. Seamlessly collect payments and engage with your community.</Text>
                             <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>
                                 Create an Event
                             </button>

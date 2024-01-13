@@ -2,16 +2,16 @@
 import { useState } from 'react';
 import { MdEmail } from "react-icons/md";
 import { CiUser } from 'react-icons/ci'
-import { Button, Input, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverArrow, PopoverCloseButton, PopoverBody, VStack, Box, useDisclosure, InputGroup, InputLeftElement, InputRightElement, Text, } from '@chakra-ui/react';
+import { Button, Input, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverArrow, PopoverCloseButton, PopoverBody, VStack, Box, useDisclosure, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react';
 import { BiSolidLockAlt } from "react-icons/bi";
 import { PiEyeBold, PiEyeClosedBold, } from 'react-icons/pi';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Login } from '../redux/AuthReducer/action';
+import { Login, Logout } from '../redux/AuthReducer/action';
 import { SignupModal } from './Signup';
 import { NavLink } from 'react-router-dom';
 
 const LoginMenu = () => {
+    const token = useSelector((store)=>store.AuthReducer.token)||localStorage.getItem('token')
     const [SignOpen, setSignOpen] = useState(false);
     function SignClose() {
         setSignOpen(!SignOpen);
@@ -20,14 +20,16 @@ const LoginMenu = () => {
 
     const handleClick = () => setShow(!show)
     const { onOpen, onClose, isOpen } = useDisclosure()
-    const [email, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const dispatch = useDispatch();
     const [pass, setPassword] = useState("");
-    // let {token} = useSelector((store) => store.AuthReducer)||localStorage.getItem('token');
     let { isAuth, name } = useSelector((store) => store.AuthReducer);
 
     function HandleLogout() {
-        //dispatch(LogoutStoringUserDatainLS);
+        dispatch(Logout(token))
+        onClose()
+        setEmail("")
+        setPassword("")
     }
 
     const handleSubmit = () => {
@@ -42,7 +44,7 @@ const LoginMenu = () => {
                 onClose={onClose} placement="bottom-end">
                 <PopoverTrigger>
                     <Button className='rounded-full'>
-                        <CiUser />
+                        {isAuth?<CiUser />:"Login"}
                     </Button>
                 </PopoverTrigger>
                 {isAuth ?
@@ -50,10 +52,11 @@ const LoginMenu = () => {
                         <PopoverArrow />
                         <PopoverCloseButton />
                         <PopoverHeader border="none" fontWeight={"bold"} color="#2b3954"
-                            fontSize="22">Welcome,<Text textTransform={"capitalize"}>{name}</Text>
+                            fontSize="22"><Text>Welcome,{name}</Text>
                         </PopoverHeader>
                         <PopoverBody >
-                            <NavLink to='/admin' className='mb-2'><Box className='border'><Text>My Events</Text></Box></NavLink>
+                            <NavLink to='/admin' className='mb-2'><button className='mb-2 text-lg'>My Events</button></NavLink>
+                            <hr/>
                             <Button colorScheme="white" fontSize="16" w="100%" fontWeight="400" bg="#2b3954" _hover={{ bgColor: "#e89f22" }} letterSpacing={"1px"} onClick={HandleLogout}>LOGOUT
                             </Button>
                         </PopoverBody>
@@ -68,7 +71,7 @@ const LoginMenu = () => {
                                 <InputLeftElement pointerEvents='none' fontSize={"22px"} className='justify-center text-center items-center'>
                                     <MdEmail />
                                 </InputLeftElement>
-                                <Input value={email} type='email' onChange={(e) => setUsername(e.target.value)} placeholder="User Email" marginBottom={2} />
+                                <Input value={email} type='email' onChange={(e) => setEmail(e.target.value)} placeholder="User Email" marginBottom={2} />
                             </InputGroup>
 
                             <InputGroup>

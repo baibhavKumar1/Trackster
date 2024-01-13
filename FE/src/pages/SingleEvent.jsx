@@ -114,7 +114,7 @@ const SingleEvent = () => {
                                 <FaPlusCircle color="darkorange" />
                             </div>
 
-                            <div className="bg-white m-2 rounded-xl p-1">Hi</div>
+                            <div className="bg-white m-2 rounded-xl p-1">No discussions</div>
                         </div>
                         <div className=" items-center bg-rose-300 rounded-xl gap-2">
                             <div className="flex items-center gap-2 p-1">

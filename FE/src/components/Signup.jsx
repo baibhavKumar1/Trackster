@@ -12,6 +12,7 @@ export const SignupModal = ({ onOpens, LetClose }) => {
     age: '',
     email: '',
     pass: '',
+    city:''
   });
 
   const handleChange = (e) => {
@@ -30,6 +31,7 @@ export const SignupModal = ({ onOpens, LetClose }) => {
       lastName: '',
       email: '',
       password: '',
+      city:''
     })
     LetClose();
   };
@@ -73,6 +75,15 @@ export const SignupModal = ({ onOpens, LetClose }) => {
             type="password"
             placeholder="Password"
             value={formData.pass}
+            onChange={handleChange}
+            marginBottom={4}
+            fontSize={"16px"} className='justify-center  items-center'
+          />
+          <Input
+            name="city"
+            type="text"
+            placeholder="City"
+            value={formData.city}
             onChange={handleChange}
             marginBottom={4}
             fontSize={"16px"} className='justify-center  items-center'

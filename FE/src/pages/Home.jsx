@@ -23,7 +23,7 @@ const Home = () => {
             <Text className='text-3xl'>Own your Events</Text>
             <Text className='text-3xl'>Only on <b className='text-orange-500'>Trackster</b></Text>
           </div>
-          <Text className=''>We&apos;re bringing events and meet ups onto Nostr. The days of walled gardens are coming to an end. It&apos;s time to truly own your events, no-longer dependent on an external company.</Text>
+          <Text className=''>We&apos;re bringing events and meet ups onto Trackster. The days of walled gardens are coming to an end. It&apos;s time to truly own your events, no-longer dependent on an external company.</Text>
           <button className='bg-orange-500 text-white p-3 rounded-xl'><NavLink to='/explore'>Start Exploring</NavLink></button>
         </div>
         <div>
@@ -34,7 +34,7 @@ const Home = () => {
       <div className='space-y-3 w-[700px]'>
         <Text className='font-bold text-2xl'>Why Trackster</Text>
         <Text>
-          The internet is changing. We have shifted from the open frontier of &ldquo;The Network&rdquo; to a series of walled gardens hording userdata to best monetize their engagement. Nostr breaks down these walls, your data follows you wherever you decide to go.</Text>
+          The internet is changing. We have shifted from the open frontier of &ldquo;The Network&rdquo; to a series of walled gardens hording userdata to best monetize their engagement. Trackster breaks down these walls, your data follows you wherever you decide to go.</Text>
         <Text>This is often portrayed as a defense against the censorious Big Tech company. But, it means so much more. It means having the freedom to move to a different platform for reasons as simple as preferring the UI, or maybe just exploring a new feature.
         </Text>
         <Text>Switching from one platform to another is as effortless as comparing sports scores on different websites. The underlying data is the same; you just now have the power to decide how it is presented to you.</Text></div>

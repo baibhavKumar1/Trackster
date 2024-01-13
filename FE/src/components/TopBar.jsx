@@ -2,7 +2,16 @@ import { InputGroup,InputRightElement,Input } from '@chakra-ui/react'
 import { CiSearch } from 'react-icons/ci'
 import LoginMenu from './Login'
 import { PiBellSimple } from 'react-icons/pi'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Relogin } from '../redux/AuthReducer/action'
 const TopBar = () => {
+  const token= localStorage.getItem('token')
+  const dispatch= useDispatch()
+  useEffect(()=>{
+    dispatch(Relogin(token))
+  },[token,dispatch])
+  
   return (
     <div>
       <div className="my-2 flex items-center justify-between mx-4">
