@@ -1,38 +1,41 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import {Button, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton} from '@chakra-ui/react';
+import { Button, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { Register } from '../redux/AuthReducer/action';
- import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export const SignupModal = ({ onOpens, LetClose }) => {
-   const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     name: '',
     age: '',
     email: '',
     pass: '',
-    city:''
+    city: ''
   });
+  const [avatar,setAvatar]= useState(null)
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    const {type, name, value } = e.target;
+    if (type === "file") {
+      setAvatar(e.target.files[0]);
+    } else {
+      setFormData({...formData,[name]: value});
+    }
+};
 
-  const handleSignup = () => {
-    //console.log(formData)
-    dispatch(Register(formData))
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      city:''
-    })
+  const handleSignup = (e) => {
+    e.preventDefault()
+    const formValue= new FormData();
+    formValue.append('name',formData.name)
+    formValue.append('email',formData.email)
+    formValue.append('pass',formData.pass)
+    formValue.append('city',formData.city)
+    formValue.append('age',formData.age)
+    formValue.append('avatar',avatar)
+    (avatar)
+    dispatch(Register(formValue))
     LetClose();
   };
 
@@ -45,6 +48,7 @@ export const SignupModal = ({ onOpens, LetClose }) => {
           fontSize="25" className='text-center'>Sign Up</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+       <form onSubmit={handleSignup}>
           <Input
             name="name"
             placeholder="Name"
@@ -68,7 +72,7 @@ export const SignupModal = ({ onOpens, LetClose }) => {
             value={formData.email}
             onChange={handleChange}
             marginBottom={4}
-           fontSize={"16px"} className='justify-center  items-center'
+            fontSize={"16px"} className='justify-center  items-center'
           />
           <Input
             name="pass"
@@ -88,10 +92,13 @@ export const SignupModal = ({ onOpens, LetClose }) => {
             marginBottom={4}
             fontSize={"16px"} className='justify-center  items-center'
           />
-        </ModalBody>
-
-        <ModalFooter>
-
+          <Input
+            name="avatar"
+            type="file"
+            onChange={handleChange}
+            marginBottom={4}
+            fontSize={"16px"} className='justify-center  items-center'
+          />
           <Button
             colorScheme="white"
             fontSize="16"
@@ -101,11 +108,14 @@ export const SignupModal = ({ onOpens, LetClose }) => {
             _hover={{ bgColor: "#e89f22" }}
             letterSpacing={"1px"}
             onClick={handleSignup}
-
+            type="submit"
           >
             SIGN UP
           </Button>
-        </ModalFooter>
+          </form>
+        </ModalBody>
+
+        
       </ModalContent>
     </Modal>
   );

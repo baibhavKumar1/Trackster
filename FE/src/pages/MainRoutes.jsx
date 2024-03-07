@@ -5,12 +5,14 @@ import Explore from './Explore';
 import Events from './Events';
 import SingleEvent from './SingleEvent';
 import Dashboard from './Admin/Dashboard';
+import Profile from './Profile';
 
 const MainRoutes = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="/admin" element={<Dashboard/>}/>
         <Route path="/explore" element={<Explore/>}/>
         <Route path="/events" element={<Events/>}/>

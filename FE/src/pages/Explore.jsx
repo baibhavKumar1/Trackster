@@ -1,4 +1,4 @@
-import { Text,  Divider } from '@chakra-ui/react'
+import { Text, Divider } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { Eventcreator } from '../components/Eventcreator';
 import Sidebar from './Sidebar';
@@ -7,16 +7,17 @@ import { GetEvent } from '../redux/EventReducer/action';
 import ExploreCard from '../components/ExploreCard';
 import test from '@date/today'
 import TopBar from '../components/TopBar';
+
 const Explore = () => {
     const dispatch = useDispatch();
     let { isAuth } = useSelector((store) => store.AuthReducer);
     const events = useSelector((store) => store.EventReducer.events);
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem('trackster');
     useEffect(() => {
         dispatch(GetEvent(token))
     }, [dispatch, token]);
 
-    //console.log(events)
+    //(events)
 
     const [SignOpen, setSignOpen] = useState(false);
     function SignClose() {
@@ -30,20 +31,24 @@ const Explore = () => {
     return (
         <div className="flex h-full justify-between relative">
             <Sidebar />
-            <Divider/>
+            <Divider />
             <div className=" absolute right-0 w-5/6">
-                <TopBar/>
+                <TopBar />
                 <Divider />
                 <div className="overflow-auto">
                     <div className=' m-2 overflow-y-hidden'>
                         <Text>Explore Calendars</Text>
+                        
                         <div className='flex gap-5 overflow-x-auto w-[68em]'>
+
                             {isAuth && events.map((item) => {
                                 return (
                                     <ExploreCard key={item._id} item={item} />
                                 )
                             })}
+
                         </div>
+                        
                     </div>
                     <div className='flex gap-4 border-2 p-2 rounded-xl m-2'>
                         <div>
@@ -60,20 +65,23 @@ const Explore = () => {
                                 LetClose={SignClose} />}
                         </div>
                     </div>
-                    {isAuth && filteredEvents.length>0 && <div className='overflow-y-hidden' >
+                    {isAuth && filteredEvents.length > 0 && <div className='overflow-y-hidden' >
                         <div className='flex items-center gap-1 m-2'>
                             <Text>Happening Today</Text>
                             <div className='w-8'>
                                 <iframe className='w-8 h-8' src="https://lottie.host/embed/426113a8-14ac-4148-bd46-744961283939/a5dsQamynl.json"></iframe>
                             </div>
                         </div>
-                        <div className='flex gap-5 overflow-x-auto w-[68em]'>
-                            {filteredEvents.map((item) => {
-                                return (
-                                    <ExploreCard key={item._id} item={item} />
-                                )
-                            })}
-                        </div>
+                        
+                            <div className='flex gap-5 overflow-x-auto border-2 w-[68em]'>
+                                {filteredEvents.map((item) => {
+                                    return (
+
+                                        <ExploreCard key={item._id} item={item} />
+
+                                    )
+                                })}
+                            </div>
                     </div>}
                 </div>
             </div>

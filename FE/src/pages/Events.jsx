@@ -10,8 +10,8 @@ const Events = () => {
     const dispatch = useDispatch();
     let { isAuth } = useSelector((store) => store.AuthReducer);
     const events = useSelector((store) => store.EventReducer.attendingEvents);
-    //console.log(events)
-    let token = localStorage.getItem('token');
+    //(events)
+    let token = localStorage.getItem('trackster');
     useEffect(() => {
         dispatch(GetAttendingEvent(token))
     }, [dispatch, token]);
@@ -25,7 +25,7 @@ const Events = () => {
       }
         const filteredBeforeEvents = events.filter((item) => (TimeBefore(item.date)));
       const filteredAfterEvents = events.filter((item) => (TimeAfter(item.date)));
-      // //console.log(filteredEvents.length)
+      // //(filteredEvents.length)
       return (
         <div className="flex h-full justify-between relative">
           <Sidebar />

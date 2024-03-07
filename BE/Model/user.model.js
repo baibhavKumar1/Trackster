@@ -4,9 +4,10 @@ const userSchema= mongoose.Schema(
     {
         name:String,
         age:Number,
+        avatar:String,
         city:String,
         email:String,
-        pass:String
+        pass:String,
     },{
         versionKey:false
     }

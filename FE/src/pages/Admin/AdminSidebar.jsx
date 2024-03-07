@@ -18,7 +18,7 @@ const AdminSidebar = () => {
                     <NavLink to='/explore'><div className="flex items-center gap-4"><RiCompassLine size="1.5em"/><Text>Explore</Text></div></NavLink>
                     <NavLink to="/events"><div className="flex items-center gap-4"><CiCalendar size="1.5em"/><Text>Events</Text></div></NavLink>
                     <NavLink to="/admin"><div className="flex items-center gap-4"><TiMessages size="1.5em"/><Text>Admin</Text></div></NavLink>
-                    <button ><div className="flex items-center p-2 justify-center gap-2 bg-orange-600 rounded-xl text-white"><GoPlus size="1.8em"/><Text>Add Note</Text></div></button>
+                    <button ><div className="flex items-center p-2 justify-center gap-2 bg-orange-600 rounded-xl text-white"><GoPlus size="1.8em"/><Text>Add Event</Text></div></button>
 
                 </div>
             </div>

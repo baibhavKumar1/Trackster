@@ -29,7 +29,7 @@ export const EventEditor = ({ onOpens, LetClose ,item}) => {
 
     const handleEdit = (e) => {
         e.preventDefault()
-        //console.log(formData)
+        //(formData)
         dispatch(EditEvent(formData))
         setFormData({
             name: '',

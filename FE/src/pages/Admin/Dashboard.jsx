@@ -11,7 +11,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   let { isAuth } = useSelector((store) => store.AuthReducer);
   const events = useSelector((store) => store.EventReducer.hostingEvents);
-  let token = localStorage.getItem('token');
+  let token = localStorage.getItem('trackster');
   const [SignOpen, setSignOpen] = useState(false);
   function SignClose() {
     setSignOpen(!SignOpen);
@@ -20,10 +20,10 @@ const Dashboard = () => {
     dispatch(GetHostingEvent(token))
   }, [dispatch, token]);
   const handleDelete = (id) => {
-    //console.log(id)
+    //(id)
     dispatch(DeleteEvent({ id, token }))
   }
-    function TimeBefore(date) {
+  function TimeBefore(date) {
     const previous = new Date(date);
     return (test.isBeforeToday(previous) == true)
   }
@@ -31,9 +31,9 @@ const Dashboard = () => {
     const previous = new Date(date);
     return (test.isBeforeToday(previous) == false)
   }
-    const filteredBeforeEvents = events.filter((item) => (TimeBefore(item.date)));
+  const filteredBeforeEvents = events.filter((item) => (TimeBefore(item.date)));
   const filteredAfterEvents = events.filter((item) => (TimeAfter(item.date)));
-  // //console.log(filteredEvents.length)
+  // //(filteredEvents.length)
   return (
     <div className="flex h-full justify-between relative">
       <AdminSidebar />
@@ -41,42 +41,41 @@ const Dashboard = () => {
       <div className="absolute right-0 w-5/6">
         <TopBar />
         <Divider />
-        <div className="grid grid-cols-2 grid-row-flow">
-        <div>
-          <Text className="ml-2 text-xl">Hosting Events</Text>
-          <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">
-            {isAuth && filteredAfterEvents.length > 0 ? filteredAfterEvents.map((item) => {
-              return (
-                <div key={item._id} >
-                  <ExploreCard item={item} />
-                  <div className="flex justify-around">
-                    <button className="bg-red-500 p-2 rounded-lg text-white" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
-                    <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
-                    {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} item={item} />}
+        <div className="flex flex-col gap-2">
+          <div>
+            <Text className="ml-2 text-xl">Hosting Events</Text>
+            <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">
+              {isAuth && filteredAfterEvents.length > 0 ? filteredAfterEvents.map((item) => {
+                return (
+                  <div key={item._id} >
+                    <ExploreCard item={item} />
+                    <div className="flex justify-around">
+                      <button className="bg-red-500 p-2 rounded-lg text-white" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
+                      <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
+                      {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} item={item} />}
+                    </div>
                   </div>
-                </div>
-              )
-            }) : <div>No events found</div>}
+                )
+              }) : <div>No events found</div>}
+            </div>
           </div>
-        </div>
-        <div>
-          <Text className="ml-2 text-xl">Ended Events</Text>
-          <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">
-            {isAuth && filteredBeforeEvents.length > 0 ? filteredBeforeEvents.map((item) => {
-              return (
-                <div key={item._id} >
-                  <ExploreCard item={item} />
-                  <div className="flex justify-around">
-                    <button className="bg-red-500 p-2 rounded-lg text-white" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
-                    <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
-                    {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} id={item._id} />}
+          <div>
+            <Text className="ml-2 text-xl">Ended Events</Text>
+            <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">
+              {isAuth && filteredBeforeEvents.length > 0 ? filteredBeforeEvents.map((item) => {
+                return (
+                  <div key={item._id} >
+                    <ExploreCard item={item} />
+                    <div className="flex justify-around">
+                      <button className="bg-red-500 p-2 rounded-lg text-white" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
+                      <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
+                      {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} id={item._id} />}
+                    </div>
                   </div>
-                </div>
-              )
-            }) : <div>No events found</div>}
-          </div> 
-        </div>
-        
+                )
+              }) : <div>No events found</div>}
+            </div>
+          </div>
         </div>
       </div>
     </div>

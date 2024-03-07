@@ -6,13 +6,14 @@ const Home = () => {
   return (
     <div>
       <div className='flex m-3 items-center justify-around'>
-        <Link to='/explore'><p>Explore</p></Link>
-        <Link to='/events'><p>Events</p></Link>
-        <Link to='/'>
+      <Link to='/'>
           <div className="mt-1">
             <GiFeather color="darkorange" size="2em" />
           </div>
         </Link>
+        <Link to='/explore'><p>Explore</p></Link>
+        <Link to='/events'><p>Events</p></Link>
+        
         <Link to='/about'><p>About</p></Link>
         <Link to='/contact'><p>Contact</p></Link>
         <LoginMenu/>

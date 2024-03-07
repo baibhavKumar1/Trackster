@@ -4,10 +4,11 @@ const attendeeSchema= mongoose.Schema(
     {
         event:[String],
         name:String,
+        avatar:String,
         hostingEvent:[String],
         email:String,
         pass:String,
-        userId:String
+        userId:String,
     },{
         versionKey:false
     }
