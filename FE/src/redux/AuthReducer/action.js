@@ -1,10 +1,9 @@
 import { GET_USER_ERROR, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_ERROR, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_ERROR, REGISTER_REQUEST, REGISTER_SUCCESS, RELOGIN_ERROR, RELOGIN_REQUEST, RELOGIN_SUCCESS } from "./actionTypes";
-import axios from 'axios';
-const userURL = "http://localhost:3000";
 
+import axios from 'axios';
+
+const userURL = import.meta.env.VITE_BACKEND_URL
 export const Register = (userData) => async (dispatch) => {
-    //const userURL = "https://clean-erin-turtleneck.cyclic.app";
-    
     dispatch({ type: REGISTER_REQUEST })
     await axios.post(`${userURL}/user/register`, userData,
     {

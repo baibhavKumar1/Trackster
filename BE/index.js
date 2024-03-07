@@ -18,5 +18,4 @@ app.listen(3000, async () => {
     catch (err) {
         console.log(err.message)
     }
-    console.log("running on 3000")
 })

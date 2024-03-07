@@ -34,7 +34,6 @@ export const SignupModal = ({ onOpens, LetClose }) => {
     formValue.append('city',formData.city)
     formValue.append('age',formData.age)
     formValue.append('avatar',avatar)
-    (avatar)
     dispatch(Register(formValue))
     LetClose();
   };
