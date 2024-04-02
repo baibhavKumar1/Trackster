@@ -3,12 +3,13 @@ import { Text } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 
 const ExploreCard = ({ item }) => {
+    const userURL = import.meta.env.VITE_BACKEND_URL
     const { _id, image, name, date, attendees, venue } = item;
     return (
         
             <div key={_id} className='shadow-sm bg-white/50 relative rounded-lg w-96 m-3'>
                 <div className='w-96 '>
-                    <img className='rounded-lg ' src={image ? `http://localhost:3000/${image}` : "https://images.unsplash.com/photo-1492684223066-81342ee5ff30"} alt='img' />
+                    <img className='rounded-lg ' src={image ? `${userURL}/${image}` : "https://images.unsplash.com/photo-1492684223066-81342ee5ff30"} alt='img' />
                     <div className='bg-white/50 text-center absolute bottom-0 left-0 right-0 rounded-xl m-3'>
                         <Text>{name}</Text>
                         <Text>Date: {date}</Text>

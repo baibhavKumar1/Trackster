@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react"
 import { AddAttendee, GetSingleEvent, RemoveAttendee } from '../redux/EventReducer/action.js'
 const SingleEvent = () => {
+    const userURL = import.meta.env.VITE_BACKEND_URL
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { id } = useParams()
     let token = useSelector((store) => store.AuthReducer.token) || localStorage.getItem('trackster');
@@ -43,6 +44,7 @@ const SingleEvent = () => {
     const deleteAttendee=()=>{
         dispatch(RemoveAttendee({id,token}))
     }
+    const userURL = import.meta.env.VITE_BACKEND_URL
     return (
         <div className="flex h-full justify-between relative">
             <Sidebar />
@@ -63,7 +65,7 @@ const SingleEvent = () => {
                 <div className=" m-4">
                     {isAuth && event.name && <>
                         <div className="bg-gray-300 rounded-xl p-3">
-                            <img src={event.image? `http://localhost:3000/${event.image}` : imageUrl }
+                            <img src={event.image? `${userURL}/${event.image}` : imageUrl }
                                 alt="img" className="h-[500px] w-full rounded-xl" />
                             <div className="flex justify-between m-2">
                                 <div>
@@ -125,7 +127,7 @@ const SingleEvent = () => {
                                     <Text>Host</Text>
                                 </div>
                                 <div className="bg-white m-2 rounded-xl flex p-1">
-                                <img src={`http://localhost:3000/${event.host.avatar}`} className="w-8"/>
+                                <img src={`${userURL}/${event.host.avatar}`} className="w-8"/>
                                 <p>{event.host.name}</p>
                                 {event.hostId}
                                 </div>
@@ -139,7 +141,7 @@ const SingleEvent = () => {
                                 return(
                                 <div key={item.userID} className="flex justify-between bg-white m-2 p-1 rounded-xl">
                                     <div className="  flex gap-2">
-                                        <img src={`http://localhost:3000/${item.userImage}`} className="w-8" alt="img"/>
+                                        <img src={`${userURL}/${item.userImage}`} className="w-8" alt="img"/>
                                         <p>{item.userName}</p>
                                     </div>
                                     <Button onClick={deleteAttendee}>Remove</Button>

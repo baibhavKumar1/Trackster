@@ -21,6 +21,7 @@ const Profile = () => {
   function SignClose() {
     setSignOpen(!SignOpen);
   }
+  const userURL = import.meta.env.VITE_BACKEND_URL
     return (
         <div className=''>
             <div className='flex m-3 items-center justify-around'>
@@ -38,7 +39,7 @@ const Profile = () => {
             </div>
             <div className=' h-[80vh] w-full flex justify-center items-center'>
                 {isAuth?<div className='border flex gap-4'>
-                <img className='w-44 aspect-1' src= { `http://localhost:3000/${profile?.b?.avatar}` } alt='img'/>
+                <img className='w-44 aspect-1' src= { `$userURL/${profile?.b?.avatar}` } alt='img'/>
                 <div className='w-48 flex flex-col text-center justify-between'>
                 <div>
                     <p>Name: {name}</p>
