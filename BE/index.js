@@ -6,7 +6,7 @@ const cors = require('cors')
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/user", UserRouter);
+app.use("/user", UserRouter); 
 app.use("/event", EventRouter);
 app.use('/images',express.static('images'))
 

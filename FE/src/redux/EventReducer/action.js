@@ -113,7 +113,7 @@ export const DeleteEvent = (data) => async (dispatch) => {
         })
 }
 
-export const AddAttendee = ({ id, token }) => async (dispatch) => {
+export const AddAttendee = ({ id, token,navigate,toast }) => async (dispatch) => {
     dispatch({ type: ADD_ATTENDEE_REQUEST })
     await axios.post(`${URL}/event/addAttendee`, { id }, {
         headers: {
@@ -122,26 +122,56 @@ export const AddAttendee = ({ id, token }) => async (dispatch) => {
     })
         .then((res) => {
             dispatch({ type: ADD_ATTENDEE_SUCCESS,payload:res })
+            toast({
+                title: "Attendee added",
+                position:"top-right",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
             dispatch(GetSingleEvent({ id, token }))
+            navigate(`/event/${id}`)
         })
         .catch((err) => {
             dispatch({ type: ADD_ATTENDEE_ERROR })
+            toast({
+                title: err.message,
+                position:"top-right",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              });
             console.log(err)
         })
 }
-export const RemoveAttendee = ({id,token}) => async (dispatch) => {
-    dispatch({ type: REMOVE_ATTENDEE_REQUEST })
-    await axios.post(`${URL}/event/removeAttendee`, {id} , {
+export const RemoveAttendee = ({ id, user, token, toast }) => async (dispatch) => {
+    dispatch({ type: REMOVE_ATTENDEE_REQUEST });
+    try {
+      const response = await axios.post(`${URL}/event/removeAttendee`, { id, user }, {
         headers: {
-            Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
-    })
-        .then((res) => {
-            dispatch({ type: REMOVE_ATTENDEE_SUCCESS, payload: res })
-            dispatch(GetSingleEvent({ id, token }))
-        })
-        .catch((err) => {
-            dispatch({ type: REMOVE_ATTENDEE_ERROR })
-            console.log(err)
-        })
-}
+      });
+      dispatch({ type: REMOVE_ATTENDEE_SUCCESS, payload: response.data });
+      toast({
+        title: "Attendee Removed",
+        position: "top-right",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      dispatch(GetSingleEvent({ id, token }));
+    } catch (err) {
+      dispatch({ type: REMOVE_ATTENDEE_ERROR });
+      toast({
+        title: "Error removing attendee",
+        description: err.message,
+        position: "top-right",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      console.error(err);
+    }
+  };
+  

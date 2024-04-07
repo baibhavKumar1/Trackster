@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { Button, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { Button, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, useToast } from '@chakra-ui/react';
 import { Register } from '../redux/AuthReducer/action';
 import { useDispatch } from 'react-redux';
 
 export const SignupModal = ({ onOpens, LetClose }) => {
   const dispatch = useDispatch();
-
+  const toast = useToast();
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -34,7 +34,7 @@ export const SignupModal = ({ onOpens, LetClose }) => {
     formValue.append('city',formData.city)
     formValue.append('age',formData.age)
     formValue.append('avatar',avatar)
-    dispatch(Register(formValue))
+    dispatch(Register(formValue,toast))
     LetClose();
   };
 

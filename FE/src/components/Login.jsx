@@ -2,15 +2,17 @@
 import { useState,useEffect } from 'react';
 import { MdEmail } from "react-icons/md";
 import { CiUser } from 'react-icons/ci'
-import { Button, Input, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverArrow, PopoverCloseButton, PopoverBody, VStack, Box, useDisclosure, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react';
+import { Button, Input, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverArrow, PopoverCloseButton, PopoverBody, VStack, Box, useDisclosure, InputGroup, InputLeftElement, InputRightElement, Text,useToast } from '@chakra-ui/react';
 import { BiSolidLockAlt } from "react-icons/bi";
 import { PiEyeBold, PiEyeClosedBold, } from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Login, Logout, Relogin } from '../redux/AuthReducer/action';
 import { SignupModal } from './Signup';
-import { NavLink } from 'react-router-dom';
+import { NavLink ,useNavigate} from 'react-router-dom';
 
 const LoginMenu = () => {
+const toast = useToast()
+const navigate = useNavigate();
     const token = useSelector((store) => store.AuthReducer.token) || localStorage.getItem('trackster')
     const [SignOpen, setSignOpen] = useState(false);
     function SignClose() {
@@ -26,7 +28,7 @@ const LoginMenu = () => {
     let { isAuth, name,avatar } = useSelector((store) => store.AuthReducer);
 
     function HandleLogout() {
-        dispatch(Logout(token))
+        dispatch(Logout(token,toast,navigate))
         onClose()
         setEmail("")
         setPassword("")
@@ -34,11 +36,11 @@ const LoginMenu = () => {
     
     useEffect(() => {
         if(token){
-            dispatch(Relogin(token))
+            dispatch(Relogin(token,toast))
         }
     }, [token, dispatch])
     const handleSubmit = () => {
-        dispatch(Login({ email, pass }));
+        dispatch(Login({ email, pass },toast));
         onClose()
     }
     const userURL = import.meta.env.VITE_BACKEND_URL
@@ -49,7 +51,7 @@ const LoginMenu = () => {
                 onClose={onClose} placement="bottom-end">
                 <PopoverTrigger>
                     <button className='rounded-full'>
-                        {isAuth ? (avatar?<img src={`{userURL}/${avatar}`} className='w-9' alt="img" />:<CiUser/>) : "Login"}
+                        {isAuth ? (avatar?<img src={`${userURL}/${avatar}`} className='w-9' alt="img" />:<CiUser/>) : "Login"}
                     </button>
                 </PopoverTrigger>
                 {isAuth ?
@@ -60,8 +62,8 @@ const LoginMenu = () => {
                             fontSize="22"><Text>Welcome,{name}</Text>
                         </PopoverHeader>
                         <PopoverBody className='flex flex-col'>
-                            <NavLink to='/admin' className='mb-2'><button className='mb-2 text-lg'>My Events</button></NavLink>
-                            <NavLink to='/profile'><button>Profile</button></NavLink>
+                            <NavLink to='/admin'><button className='mb-2 text-lg'>My Events</button></NavLink>
+                            <NavLink to='/profile'><button className='mb-2 text-lg'>Profile</button></NavLink>
                             <Button colorScheme="white" fontSize="16" w="100%" fontWeight="400" bg="#2b3954" _hover={{ bgColor: "#e89f22" }} letterSpacing={"1px"} onClick={HandleLogout}>LOGOUT
                             </Button>
                         </PopoverBody>

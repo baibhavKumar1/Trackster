@@ -7,6 +7,7 @@ const jwt= require('jsonwebtoken');
 const auth = require('../Middleware/auth.middleware');
 const upload = require('../Middleware/upload.middleware');
 const AttendeeModel = require('../Model/attendee.model');
+require('dotenv').config();
 
 UserRouter.get("/",async(req,res)=>{
     res.send("It's on")

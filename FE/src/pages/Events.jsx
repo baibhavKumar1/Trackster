@@ -25,15 +25,14 @@ const Events = () => {
       }
         const filteredBeforeEvents = events.filter((item) => (TimeBefore(item.date)));
       const filteredAfterEvents = events.filter((item) => (TimeAfter(item.date)));
-      // //(filteredEvents.length)
+      
       return (
-        <div className="flex h-full justify-between relative">
+        <div className="flex h-full justify-between w-screen">
           <Sidebar />
-          <Divider />
-          <div className="absolute right-0 w-5/6">
+          <div className="lg:w-[80%] md:w-[80%] w-full">
             <TopBar />
             <Divider />
-            <div className="grid grid-cols-2 grid-row-flow">
+            <div className="grid grid-cols-2 grid-row-flow p-4">
             <div>
               <Text className="ml-2 text-xl">Attending Events</Text>
               <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">

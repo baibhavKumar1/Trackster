@@ -1,5 +1,4 @@
 import { Divider, Text } from "@chakra-ui/react"
-import AdminSidebar from "./AdminSidebar"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import test from '@date/today'
@@ -7,6 +6,7 @@ import { DeleteEvent, GetHostingEvent } from "../../redux/EventReducer/action"
 import ExploreCard from "../../components/ExploreCard"
 import TopBar from "../../components/TopBar"
 import { EventEditor } from "../../components/EventEditor"
+import Sidebar from "../Sidebar"
 const Dashboard = () => {
   const dispatch = useDispatch();
   let { isAuth } = useSelector((store) => store.AuthReducer);
@@ -35,10 +35,9 @@ const Dashboard = () => {
   const filteredAfterEvents = events.filter((item) => (TimeAfter(item.date)));
   // //(filteredEvents.length)
   return (
-    <div className="flex h-full justify-between relative">
-      <AdminSidebar />
-      <Divider />
-      <div className="absolute right-0 w-5/6">
+    <div className="flex h-full justify-between ">
+      <Sidebar />
+      <div  className="lg:w-[80%] md:w-[75%] w-full">
         <TopBar />
         <Divider />
         <div className="flex flex-col gap-2">
@@ -47,11 +46,11 @@ const Dashboard = () => {
             <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">
               {isAuth && filteredAfterEvents.length > 0 ? filteredAfterEvents.map((item) => {
                 return (
-                  <div key={item._id} >
+                  <div key={item._id} className=" w-max">
                     <ExploreCard item={item} />
                     <div className="flex justify-around">
-                      <button className="bg-red-500 p-2 rounded-lg text-white" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
-                      <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
+                      <button className="border border-red-500 p-2 rounded-lg font-mono" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
+                      <button className='bg-orange-500 p-2 rounded-lg text-white font-mono' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
                       {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} item={item} />}
                     </div>
                   </div>
@@ -64,11 +63,11 @@ const Dashboard = () => {
             <div className=" grid grid-cols-4 grid-flow-row right-0 w-full">
               {isAuth && filteredBeforeEvents.length > 0 ? filteredBeforeEvents.map((item) => {
                 return (
-                  <div key={item._id} >
+                  <div key={item._id} className="w-max">
                     <ExploreCard item={item} />
                     <div className="flex justify-around">
-                      <button className="bg-red-500 p-2 rounded-lg text-white" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
-                      <button className='bg-orange-500 p-2 rounded-lg text-white' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
+                      <button className="border border-red-500 p-2 rounded-lg font-mono" onClick={() => { handleDelete(item._id) }}>Delete Event</button>
+                      <button className='bg-orange-500 p-2 rounded-lg text-white font-mono' onClick={() => { setSignOpen(!SignOpen) }}>Edit Event</button>
                       {SignOpen && <EventEditor onOpens={SignOpen} LetClose={SignClose} id={item._id} />}
                     </div>
                   </div>
