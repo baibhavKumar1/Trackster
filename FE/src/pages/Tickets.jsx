@@ -12,7 +12,6 @@ const Tickets = () => {
   const navigate = useNavigate()
   const [selectedSeat, setSelectedSeat] = useState(null);
 
-  const userURL = import.meta.env.VITE_BACKEND_URL
   const { id } = useParams()
   let token = useSelector((store) => store.AuthReducer.token) || localStorage.getItem('trackster');
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ const Tickets = () => {
 
   const handleSeatSelection = (seat) => {
     setSelectedSeat((prevSeat) => {
-      // If the clicked seat is already selected, unselect it
       if (prevSeat === seat) {
         return null;
       }
@@ -109,7 +107,7 @@ const Tickets = () => {
                 alt="Music in the Park"
                 className="aspect-video overflow-hidden rounded-xl object-cover object-center"
                 height="337"
-                src={event.image ? `${userURL}/${event.image}` : imageUrl}
+                src={event.image ? event.image : imageUrl}
                 width="600"
               />
             </div>

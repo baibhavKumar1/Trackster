@@ -7,6 +7,7 @@ const jwt= require('jsonwebtoken');
 const auth = require('../Middleware/auth.middleware');
 const upload = require('../Middleware/upload.middleware');
 const AttendeeModel = require('../Model/attendee.model');
+const uploadToCloudinary = require('../Middleware/image');
 require('dotenv').config();
 
 UserRouter.get("/",async(req,res)=>{
@@ -15,8 +16,7 @@ UserRouter.get("/",async(req,res)=>{
 
 UserRouter.post('/register',upload.single('avatar'), async(req,res)=>{
     const {name,age,email,pass,city}= req.body;
-    (req.file)
-    const avatar = req.file ? req.file.path : null;
+    
     try{
         const exist= await UserModel.findOne({email});
         if(exist){
@@ -26,6 +26,7 @@ UserRouter.post('/register',upload.single('avatar'), async(req,res)=>{
             if(err){
                 return res.status(400).send(err.message);
             }
+            let avatar = await uploadToCloudinary(req?.file?.path);
             const user= new UserModel({
                 name,email,city,avatar,pass:hash,age
             });

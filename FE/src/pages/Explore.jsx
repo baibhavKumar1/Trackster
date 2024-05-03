@@ -7,17 +7,20 @@ import { GetEvent } from '../redux/EventReducer/action';
 import ExploreCard from '../components/ExploreCard';
 import test from '@date/today'
 import TopBar from '../components/TopBar';
+import Mobilesidebar from './MobileSidebar';
 
 const Explore = () => {
     const dispatch = useDispatch();
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
     let { isAuth } = useSelector((store) => store.AuthReducer);
     const events = useSelector((store) => store.EventReducer.events);
     let token = localStorage.getItem('trackster');
+    const toggleSidebar = () => {
+        setSidebarOpen(!isSidebarOpen);
+      };
     useEffect(() => {
         dispatch(GetEvent(token))
     }, [dispatch, token]);
-
-    //(events)
 
     const [SignOpen, setSignOpen] = useState(false);
     function SignClose() {
@@ -31,8 +34,9 @@ const Explore = () => {
     return (
         <div className="flex h-full justify-between w-screen">
             <Sidebar />
+            <Mobilesidebar isOpen={isSidebarOpen} closeMenu={toggleSidebar}/>
             <div className="lg:w-[80%] md:w-[75%] w-full">
-                <TopBar />
+                <TopBar toggleSidebar={toggleSidebar}/>
                 <Divider />
                 <div className="overflow-auto">
                     <div className='p-2 overflow-y-hidden'>

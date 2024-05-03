@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { InputGroup,InputRightElement,Input } from '@chakra-ui/react'
 import { CiMenuFries, CiSearch } from 'react-icons/ci'
 import LoginMenu from './Login'
@@ -8,7 +9,7 @@ import { Relogin } from '../redux/AuthReducer/action'
 import { GiFeather } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 
-const TopBar = () => {
+const TopBar = ({toggleSidebar}) => {
   const token= localStorage.getItem('trackster')
   const dispatch= useDispatch()
   useEffect(()=>{
@@ -19,7 +20,7 @@ const TopBar = () => {
     <div>
       <div className="my-2 flex items-center justify-between mx-4 gap-4">
       <div className='flex gap-2 items-center md:hidden lg:hidden'>
-        <CiMenuFries size="1em"/>
+        <CiMenuFries size="1em" onClick={toggleSidebar}/>
       <Link to='/'><GiFeather color="darkorange" size="2em" /></Link>
       </div>
       

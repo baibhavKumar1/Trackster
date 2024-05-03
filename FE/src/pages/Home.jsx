@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom'
 import { Text } from '@chakra-ui/react'
 import Navbar from '../components/Navbar'
+import Mobilesidebar from './MobileSidebar'
+import { useState } from 'react'
 const Home = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
   return (
     <div>
-      <Navbar/>
+      <Navbar toggleSidebar={toggleSidebar}/>
+      <Mobilesidebar isOpen={isSidebarOpen} closeMenu={toggleSidebar}/>
       <div className='flex p-16 xs:p-0 md:py-4 sm:p-4 m-10 gap-24 flex-col lg:flex-row md:flex-row'>
         <div className='space-y-3'>
           <div>

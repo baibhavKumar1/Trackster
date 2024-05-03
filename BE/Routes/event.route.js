@@ -4,7 +4,8 @@ const AttendeeModel = require('../Model/attendee.model');
 const auth = require('../Middleware/auth.middleware');
 const UserModel = require('../Model/user.model');
 const upload = require('../Middleware/upload.middleware');
-const { getEnvironmentData } = require('worker_threads');
+const uploadToCloudinary = require('../Middleware/image');
+
 const EventRouter = express.Router();
 
 
@@ -156,14 +157,15 @@ EventRouter.post('/create', [upload.single('image'), auth], async (req, res) => 
     console.log(req.body.userID);
     const { name, venue, description, date, userID } = req.body;
     const user = await UserModel.findById(userID);
-
-    const image = req.file ? req.file.path : null;
+    
+    //const image = req.file ? req.file.path : null;
     const exist = await EventModel.findOne({ name, venue });
 
     if (exist) {
       return res.status(400).send("Event already exists");
     }
     else {
+      let image = await uploadToCloudinary(req?.file?.path);
       const newEvent = new EventModel({
         name, venue, description, date, image, host: { id: userID, name: user.name, avatar: user.avatar }
       });

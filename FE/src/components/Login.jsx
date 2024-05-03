@@ -43,7 +43,7 @@ const navigate = useNavigate();
         dispatch(Login({ email, pass },toast));
         onClose()
     }
-    const userURL = import.meta.env.VITE_BACKEND_URL
+    // const userURL = import.meta.env.VITE_BACKEND_URL
     return (
         <VStack align="end">
             <Popover isOpen={isOpen}
@@ -51,7 +51,7 @@ const navigate = useNavigate();
                 onClose={onClose} placement="bottom-end">
                 <PopoverTrigger>
                     <button className='rounded-full'>
-                        {isAuth ? (avatar?<img src={`${userURL}/${avatar}`} className='w-9' alt="img" />:<CiUser/>) : "Login"}
+                        {isAuth ? (avatar?<img src={avatar} className='w-9' alt="img" />:<CiUser/>) : "Login"}
                     </button>
                 </PopoverTrigger>
                 {isAuth ?
