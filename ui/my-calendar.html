@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-secondary-container": "#556d00",
+            "tertiary-fixed": "#e2e2e2",
+            "surface-bright": "#39393b",
+            "on-primary": "#370096",
+            "inverse-surface": "#e5e1e4",
+            "surface-container": "#201f21",
+            "surface-container-lowest": "#0e0e10",
+            "inverse-on-surface": "#313032",
+            "background": "#131315",
+            "surface-container-high": "#2a2a2c",
+            "surface-tint": "#cdbdff",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "error": "#ffb4ab",
+            "tertiary": "#c6c6c6",
+            "surface-dim": "#131315",
+            "primary-container": "#5d21df",
+            "on-tertiary-container": "#c8c8c8",
+            "on-surface-variant": "#cbc3d9",
+            "secondary": "#ffffff",
+            "secondary-fixed-dim": "#abd600",
+            "secondary-fixed": "#c3f400",
+            "on-primary-fixed-variant": "#4f00d0",
+            "on-primary-fixed": "#20005f",
+            "surface-container-low": "#1c1b1d",
+            "outline-variant": "#494456",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "outline": "#948da2",
+            "inverse-primary": "#6833ea",
+            "on-secondary-fixed": "#161e00",
+            "on-error-container": "#ffdad6",
+            "surface-container-highest": "#353437",
+            "on-secondary": "#283500",
+            "on-secondary-fixed-variant": "#3c4d00",
+            "surface": "#131315",
+            "primary-fixed-dim": "#cdbdff",
+            "on-tertiary": "#2f3131",
+            "primary-fixed": "#e8deff",
+            "secondary-container": "#c3f400",
+            "on-primary-container": "#cebfff",
+            "on-background": "#e5e1e4",
+            "surface-variant": "#353437",
+            "on-tertiary-fixed-variant": "#454747",
+            "primary": "#cdbdff",
+            "on-surface": "#e5e1e4",
+            "tertiary-container": "#525454"
+          },
+          fontFamily: {
+            "headline": ["Space Grotesk"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          },
+          borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #131315;
+      color: #e5e1e4;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .font-headline {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .glass-panel {
+      background: rgba(32, 31, 33, 0.6);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(205, 189, 255, 0.05);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen">
+  <!-- SideNavBar (from JSON) -->
+  <aside
+    class="h-screen w-64 fixed left-0 top-0 bg-[#131315] shadow-[20px_0_80px_rgba(0,0,0,0.45)] z-50 flex flex-col p-6 space-y-8">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="text-[#cdbdff] font-['Space_Grotesk'] font-bold text-2xl tracking-tighter uppercase">NOCTURNE</span>
+    </div>
+    <div class="flex flex-col items-center gap-3 p-4 bg-[#201f21] rounded-2xl mb-6">
+      <div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-highest">
+        <img alt="User Profile"
+          data-alt="Close-up portrait of a stylish person with neon rim lighting in a dark urban environment, editorial style"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-Rk6XCmCTiqxrtunMSpZyGL2pYKWyOw9-zjCgwkCjHO9H01aCwPnBqRbq4baDuLHmrNLSgIgdNP8wLV9dpC53WQLNPTBpmT0N9xp166ETJbDOoVtsiG1rvZesAyEyqdROkQDbMQxtKvYngFdQFnO8C1wudTn8ntbRGPwNO600y_gcDZxnivFRb4CXGrHmHO2iWXsbOm5-8W023kOIfRoqa7GB0OenYJDdx1IeDQRRN07OXIxa5Hkxaqvh-EqEcUGsFUgazK_J3II" />
+      </div>
+      <div class="text-center">
+        <p class="font-['Manrope'] text-[#cdbdff] font-bold">VIP Attendee</p>
+        <p class="font-['Manrope'] text-xs text-[#cbc3d9]">Elite Member</p>
+      </div>
+    </div>
+    <nav class="flex-1 space-y-2">
+      <a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all hover:scale-105 duration-200"
+        href="#">
+        <span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+        <span class="font-['Manrope'] text-sm font-medium">Saved Events</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 bg-[#cdbdff] text-[#131315] rounded-full font-bold shadow-[0_0_20px_rgba(205,189,255,0.3)] hover:scale-105 transition-transform duration-200"
+        href="#">
+        <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+        <span class="font-['Manrope'] text-sm font-medium">Calendar</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all hover:scale-105 duration-200"
+        href="#">
+        <span class="material-symbols-outlined" data-icon="rss_feed">rss_feed</span>
+        <span class="font-['Manrope'] text-sm font-medium">Following</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all hover:scale-105 duration-200"
+        href="#">
+        <span class="material-symbols-outlined" data-icon="history">history</span>
+        <span class="font-['Manrope'] text-sm font-medium">History</span>
+      </a>
+    </nav>
+    <div class="mt-auto pt-6 border-t border-outline-variant/10 space-y-2">
+      <button
+        class="w-full py-4 mb-4 bg-gradient-to-r from-[#cdbdff] to-[#6833ea] text-[#131315] rounded-full font-bold text-sm tracking-wide hover:scale-[1.02] transition-transform">
+        Book New Event
+      </button>
+      <a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] transition-all" href="#">
+        <span class="material-symbols-outlined" data-icon="settings">settings</span>
+        <span class="font-['Manrope'] text-sm font-medium">Settings</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] transition-all" href="#">
+        <span class="material-symbols-outlined" data-icon="logout">logout</span>
+        <span class="font-['Manrope'] text-sm font-medium">Logout</span>
+      </a>
+    </div>
+  </aside>
+  <!-- Main Canvas -->
+  <main class="ml-64 flex-1 flex flex-col p-8 space-y-8 bg-background">
+    <!-- Header Section -->
+    <header class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <h1 class="font-headline text-5xl font-black tracking-tight text-on-background leading-none">NOVEMBER 2024</h1>
+        <p class="font-body text-on-surface-variant mt-2 tracking-wide uppercase text-sm">Trackster Dashboard / Personal
+          Schedule</p>
+      </div>
+      <!-- Calendar View Toggle -->
+      <div class="flex bg-surface-container p-1 rounded-full shadow-inner">
+        <button
+          class="px-6 py-2 rounded-full font-bold text-sm text-[#131315] bg-[#cdbdff] transition-all">Month</button>
+        <button
+          class="px-6 py-2 rounded-full font-medium text-sm text-[#cbc3d9] hover:text-white transition-all">Week</button>
+        <button
+          class="px-6 py-2 rounded-full font-medium text-sm text-[#cbc3d9] hover:text-white transition-all">Agenda</button>
+      </div>
+    </header>
+    <!-- Main Content Area: Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Calendar Grid (Left 8 Columns) -->
+      <div class="lg:col-span-8 space-y-6">
+        <div class="glass-panel rounded-xl overflow-hidden shadow-2xl">
+          <!-- Day Headers -->
+          <div class="grid grid-cols-7 border-b border-outline-variant/20 bg-surface-container-high/40">
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Sun</div>
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Mon</div>
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Tue</div>
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Wed</div>
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Thu</div>
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Fri</div>
+            <div class="py-4 text-center text-xs font-bold text-on-surface-variant uppercase tracking-widest">Sat</div>
+          </div>
+          <!-- Calendar Grid Cells -->
+          <div class="grid grid-cols-7 grid-rows-5 gap-px bg-outline-variant/10">
+            <!-- Empty cells for start of month -->
+            <div class="bg-surface-container/30 min-h-[120px] p-3 text-on-surface-variant/30 font-headline">27</div>
+            <div class="bg-surface-container/30 min-h-[120px] p-3 text-on-surface-variant/30 font-headline">28</div>
+            <div class="bg-surface-container/30 min-h-[120px] p-3 text-on-surface-variant/30 font-headline">29</div>
+            <div class="bg-surface-container/30 min-h-[120px] p-3 text-on-surface-variant/30 font-headline">30</div>
+            <div class="bg-surface-container/30 min-h-[120px] p-3 text-on-surface-variant/30 font-headline">31</div>
+            <!-- Month days -->
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">1</span>
+              <div class="mt-2 space-y-1">
+                <div class="w-full h-1 bg-secondary-fixed rounded-full"></div>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">2</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">3</span>
+              <div class="mt-2 flex gap-1">
+                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                <div class="w-2 h-2 rounded-full bg-secondary-fixed"></div>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">4</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer border-2 border-primary shadow-[inset_0_0_15px_rgba(205,189,255,0.1)]">
+              <span class="font-headline text-2xl font-black text-primary">5</span>
+              <div class="mt-3 flex flex-col gap-1.5">
+                <div class="px-2 py-0.5 rounded bg-primary/20 text-[10px] font-bold text-primary uppercase">Main Event
+                </div>
+                <div
+                  class="px-2 py-0.5 rounded bg-secondary-fixed/20 text-[10px] font-bold text-secondary-fixed uppercase">
+                  Workshop</div>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">6</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">7</span>
+              <div class="mt-2 flex gap-1">
+                <div class="w-2 h-2 rounded-full bg-error"></div>
+              </div>
+            </div>
+            <!-- ... More rows ... -->
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">8</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">9</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">10</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">11</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">12</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">13</span>
+            </div>
+            <div
+              class="bg-surface-container min-h-[120px] p-3 transition-colors hover:bg-surface-container-high relative group cursor-pointer">
+              <span class="font-headline text-lg font-medium">14</span>
+            </div>
+          </div>
+        </div>
+        <!-- Sync Options -->
+        <div class="flex flex-wrap gap-4">
+          <button
+            class="flex items-center gap-3 px-6 py-4 bg-surface-container hover:bg-surface-container-high rounded-2xl transition-all group flex-1">
+            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform"
+              data-icon="sync">sync</span>
+            <div class="text-left">
+              <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Cloud Integration</p>
+              <p class="text-sm font-bold text-on-surface">Sync to Google Calendar</p>
+            </div>
+          </button>
+          <button
+            class="flex items-center gap-3 px-6 py-4 bg-surface-container hover:bg-surface-container-high rounded-2xl transition-all group flex-1">
+            <span class="material-symbols-outlined text-secondary-fixed group-hover:scale-110 transition-transform"
+              data-icon="calendar_add_on">calendar_add_on</span>
+            <div class="text-left">
+              <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Direct Import</p>
+              <p class="text-sm font-bold text-on-surface">Sync to Apple Calendar</p>
+            </div>
+          </button>
+        </div>
+      </div>
+      <!-- Right Panel: Selected Date Details (Right 4 Columns) -->
+      <div class="lg:col-span-4 space-y-6">
+        <!-- Conflict Detector -->
+        <div class="p-6 rounded-2xl bg-error-container/20 border-l-4 border-error flex gap-4 items-start shadow-xl">
+          <span class="material-symbols-outlined text-error mt-1" data-icon="warning">warning</span>
+          <div>
+            <p class="font-headline text-error font-bold text-lg leading-tight uppercase tracking-tight">Schedule
+              Conflict</p>
+            <p class="font-body text-error text-sm mt-1">You have Design Conf at the same time as the Networking Lounge
+              VIP session.</p>
+          </div>
+        </div>
+        <!-- Day Detail View -->
+        <div class="glass-panel rounded-2xl p-8 space-y-8">
+          <div class="space-y-1">
+            <h2 class="font-headline text-2xl font-bold tracking-tight">TODAY'S LINEUP</h2>
+            <p class="text-on-surface-variant font-medium">Tuesday, Nov 5th</p>
+          </div>
+          <div class="space-y-6">
+            <!-- Event Item 1 -->
+            <div
+              class="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-primary before:rounded-full">
+              <p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">09:00 AM — 11:30 AM</p>
+              <h3 class="font-headline text-xl font-bold">Mainstage Keynote</h3>
+              <p class="text-on-surface-variant text-sm mt-1">Plenary Hall • Hall A</p>
+            </div>
+            <!-- Event Item 2 (Conflict Item) -->
+            <div
+              class="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-secondary-fixed before:rounded-full">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-xs font-bold text-secondary-fixed uppercase tracking-widest mb-1">01:00 PM — 02:30 PM
+                  </p>
+                  <h3 class="font-headline text-xl font-bold">Design Conf 2024</h3>
+                  <p class="text-on-surface-variant text-sm mt-1">Virtual Room 4</p>
+                </div>
+                <span
+                  class="bg-error text-on-error px-2 py-0.5 rounded text-[10px] font-black uppercase">Conflict</span>
+              </div>
+            </div>
+            <!-- Event Item 3 (Conflict Item) -->
+            <div
+              class="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-surface-tint before:rounded-full bg-surface-container-highest/20 p-4 rounded-r-xl">
+              <p class="text-xs font-bold text-surface-tint uppercase tracking-widest mb-1">01:30 PM — 04:00 PM</p>
+              <h3 class="font-headline text-xl font-bold">Networking Lounge VIP</h3>
+              <p class="text-on-surface-variant text-sm mt-1">Penthouse Terrace</p>
+              <button class="mt-4 text-xs font-bold text-[#cdbdff] flex items-center gap-1 group">
+                Manage Reservation
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform"
+                  data-icon="chevron_right">chevron_right</span>
+              </button>
+            </div>
+          </div>
+          <!-- Decorative Visual -->
+          <div class="mt-8 rounded-xl overflow-hidden aspect-video relative group">
+            <img alt="Convention Center"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              data-alt="Wide shot of a futuristic dark-themed convention hall with violet and cyan accent lighting, editorial photography"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDafFl3LniNdkLBPVONSdtH21yil9MB3mq6p9tS3mY8vUN7H-X47jKSTE7Z_wR0A4B_i4d_KYpSBeGHt38GDcTLJny5AWOI-YhHDmI5Pp_YKKc-ZZJiBkpCWvwQaPHiMGxwaUJDiyoA8kxN9Et15QIz42P_glEy8_wRgPqXvz3sL4uH7kvwBRaVKYRv8U9CCXPwXrqqzf3QzDsrYiJgufdygOkPn_d8uTrZtJFbxYSFdKLfIua8JkJjhWe0Crfj0eqB9WtQ2b_C4Tc" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+            <div class="absolute bottom-4 left-4">
+              <p class="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Next Venue Location</p>
+              <p class="text-sm font-black text-white uppercase tracking-tighter">Nexus Convention Hub</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Contextual FAB - Calendar Quick Add -->
+  <button
+    class="fixed bottom-8 right-8 w-16 h-16 bg-[#c3f400] text-[#161e00] rounded-full shadow-[0_10px_40px_rgba(195,244,0,0.3)] flex items-center justify-center hover:scale-110 transition-transform z-50 group">
+    <span class="material-symbols-outlined text-3xl font-bold group-hover:rotate-90 transition-transform"
+      data-icon="add">add</span>
+  </button>
+</body>
+
+</html>

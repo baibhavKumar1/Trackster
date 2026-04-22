@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trackster Attendee Dashboard - Following</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#556d00",
+              "tertiary-fixed": "#e2e2e2",
+              "surface-bright": "#39393b",
+              "on-primary": "#370096",
+              "inverse-surface": "#e5e1e4",
+              "surface-container": "#201f21",
+              "surface-container-lowest": "#0e0e10",
+              "inverse-on-surface": "#313032",
+              "background": "#131315",
+              "surface-container-high": "#2a2a2c",
+              "surface-tint": "#cdbdff",
+              "on-tertiary-fixed": "#1a1c1c",
+              "on-error": "#690005",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "tertiary": "#c6c6c6",
+              "surface-dim": "#131315",
+              "primary-container": "#5d21df",
+              "on-tertiary-container": "#c8c8c8",
+              "on-surface-variant": "#cbc3d9",
+              "secondary": "#ffffff",
+              "secondary-fixed-dim": "#abd600",
+              "secondary-fixed": "#c3f400",
+              "on-primary-fixed-variant": "#4f00d0",
+              "on-primary-fixed": "#20005f",
+              "surface-container-low": "#1c1b1d",
+              "outline-variant": "#494456",
+              "tertiary-fixed-dim": "#c6c6c6",
+              "outline": "#948da2",
+              "inverse-primary": "#6833ea",
+              "on-secondary-fixed": "#161e00",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#353437",
+              "on-secondary": "#283500",
+              "on-secondary-fixed-variant": "#3c4d00",
+              "surface": "#131315",
+              "primary-fixed-dim": "#cdbdff",
+              "on-tertiary": "#2f3131",
+              "primary-fixed": "#e8deff",
+              "secondary-container": "#c3f400",
+              "on-primary-container": "#cebfff",
+              "on-background": "#e5e1e4",
+              "surface-variant": "#353437",
+              "on-tertiary-fixed-variant": "#454747",
+              "primary": "#cdbdff",
+              "on-surface": "#e5e1e4",
+              "tertiary-container": "#525454"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-card {
+            background: rgba(32, 31, 33, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(73, 68, 86, 0.15);
+        }
+        .vortex-gradient {
+            background: linear-gradient(135deg, #cdbdff 0%, #6833ea 100%);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(195, 244, 0, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-8 py-4 w-full bg-[#131315]/80 backdrop-blur-xl">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-[#cdbdff] uppercase font-['Space_Grotesk']">NOCTURNE</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex bg-surface-container-high rounded-full px-4 py-2 items-center gap-3 w-64">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full text-on-surface" placeholder="Search events..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-[#cdbdff]">
+<button class="hover:text-secondary-fixed transition-colors duration-300 transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-secondary-fixed transition-colors duration-300 transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 bg-gradient-to-b from-[#201f21] to-transparent h-px w-full"></div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#131315] pt-24 shadow-[20px_0_80px_rgba(0,0,0,0.45)] z-40 hidden md:block">
+<nav class="flex flex-col h-full p-6 space-y-8 font-['Manrope'] text-sm font-medium">
+<div class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="bookmark">bookmark</span>
+<span>Saved Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="calendar_today">calendar_today</span>
+<span>Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#cdbdff] text-[#131315] rounded-full font-bold shadow-[0_0_20px_rgba(205,189,255,0.3)] group" href="#">
+<span class="material-symbols-outlined" data-icon="rss_feed">rss_feed</span>
+<span>Following</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="history">history</span>
+<span>History</span>
+</a>
+</div>
+<div class="pt-8 space-y-4">
+<div class="px-4 py-2">
+<p class="text-[10px] uppercase tracking-widest text-outline">Account</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+<div class="mt-auto p-4 bg-surface-container rounded-lg">
+<div class="flex items-center gap-3 mb-4">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIFa3pBRKLguejX8sCfokK8fIYegR4M15oqoIFoe3OzQGaSC9ovdipu-53h7VKbtC0kJ9GE2DRy-Qu9RxzEj7TJYzWPmolCwGMh9oCaiGdsmDsexEe955AUOMC_CJu6DIoaFZyHMHuCfD8PtpdX6Me5y7lV_cbgRM3l7_61bp7cqZNyYapLQRmKtj67jEnAT7mzogq-CewqvotqogCFqMuuFqMQpSYeC-b_1NGkr6hMuEYOCvvWwObtP7Pm-2Rr5er6HmVBgcLs_0"/>
+<div>
+<p class="font-bold text-on-surface">VIP Attendee</p>
+<p class="text-xs text-on-surface-variant">Elite Member</p>
+</div>
+</div>
+<button class="w-full vortex-gradient text-on-primary font-bold py-3 rounded-full text-xs uppercase tracking-tighter hover:scale-105 transition-transform active:opacity-80">
+                        Book New Event
+                    </button>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-8 bg-background relative">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+<!-- Left Column: Organizers & Suggestions -->
+<div class="lg:w-1/3 space-y-12">
+<!-- Organizers You Follow -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold font-headline tracking-tight text-primary">Following</h2>
+<span class="text-xs font-bold bg-surface-container-high px-3 py-1 rounded-full text-secondary-fixed uppercase tracking-wider">24 Active</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Organizer Card -->
+<div class="surface-container p-4 rounded-lg flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-secondary-fixed transition-all">
+<img class="w-full h-full object-cover" data-alt="Abstract minimalist logo of a tech organization in vibrant blue on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0QGNtxsYEGcsuNjCAhVbM1anZCaD5-soH3RzFU9t6szACpRVig8VQhQQMD1imwRff0BiQ3Zuea2RM2BlXlmSTA46V0IVV5F9yiU03fZ-_rTrIT3KiSeqzTrhZQJ60fZnTTdFtgmZ9uNZy4v1uE7O2iFw4dkw6jk6UC2ENKRqxBeop8ypU-OkEEUPCHVES_Lz14JIruY40Co8RSJiPJQGxc6J2NI32ZYA1qYgbF4Y1-MiNDcUz2YpTcITobdj1-h_sNcXvSK4ifj8"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Nasscom</h3>
+<p class="text-xs text-on-surface-variant">3 Upcoming Events</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-fixed" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="surface-container p-4 rounded-lg flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-secondary-fixed transition-all">
+<img class="w-full h-full object-cover" data-alt="Geometric icon representing GDG tech community in bright google colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArDoBQAa5vS8jG-ls4UwdrHbciIJcIONSK3v3VHYGNnk8hmfW76iWbMOh_ssbOgzdaN-Xz7_0gdEuy6cuUpLmSOwuv03_kiAZ1pMpO-DZfnQsU4V4DB4Xp2gqaof6_lE0e6yIxMRAFXjxjESE_VrQnaVWTs4562K0Y5U2DHhuLOxLOgdspkkctQpaZdLiCkC966_ot0-5saW0CpJgdoMmfGWi7QUBvT13OEfBXy8uB8968a8OIK0voesVRY9zNAChI8ftvn9sjcBM"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">GDG Bengaluru</h3>
+<p class="text-xs text-on-surface-variant">1 Upcoming Event</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-fixed" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="surface-container p-4 rounded-lg flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-secondary-fixed transition-all">
+<img class="w-full h-full object-cover" data-alt="High quality food photography icon with vibrant fruits and a fork symbol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkZq8o91AwJqj4VhPIIve9shFyUhNAq24PzqAh6MIS8hkE9XqqLOTeQJ04joanLaHFWUSL6x8SxOtypmAKOVzT7LqxtzvohSNzMIwe39rWNYXMwYGC8tcjLWXsgvytRUbka6DIjEieOmPfQc6NjM_12cq9SQXd5EHw38gQwWvkoceB7x8dfNAdOCbIrr6wSLVt6LgdriN0M5gu7pkZusRRfViL2-pf2BgthJkWvb6sX2SmEEXnbc02T_MIdgiELGKW4JsEj1RX1Bo"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Food Fest Intl</h3>
+<p class="text-xs text-on-surface-variant">5 Upcoming Events</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-fixed" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Suggested Organizers -->
+<section>
+<h2 class="text-xl font-bold font-headline mb-6 text-on-surface">Suggested for You</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border-l-4 border-secondary-fixed">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-full flex items-center justify-center font-bold text-secondary-fixed">T</div>
+<div>
+<p class="text-sm font-bold text-on-surface">TechSpark India</p>
+<p class="text-[10px] text-on-surface-variant">Popular in Bengaluru</p>
+</div>
+</div>
+<button class="text-xs font-bold text-secondary-fixed hover:underline">FOLLOW</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-full flex items-center justify-center font-bold text-secondary-fixed">D</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Design Days</p>
+<p class="text-[10px] text-on-surface-variant">Based on your interests</p>
+</div>
+</div>
+<button class="text-xs font-bold text-secondary-fixed hover:underline">FOLLOW</button>
+</div>
+</div>
+</section>
+<!-- Friend Activity -->
+<section class="glass-card p-6 rounded-lg">
+<h2 class="text-lg font-bold font-headline mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="group">group</span>
+                            Friend Activity
+                        </h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<img class="w-8 h-8 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-background" data-alt="Candid portrait of a young Indian woman smiling warmly, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeflHzNk5m065DBFbB4G-4s2YuqPhRcvKjAh1KM3OZaMo1rS7ErJXHtMPduaMk8tlXd5QQZCN5rCU20g-Z2ubZo6gqpHAslqRacnyzt7_MPoGa7vCrvVUyZ1FgNjqDeJpqgGYXk09LhO4TAXovjm8Ize9RacrrsKi4-X1Ab52HBpbzo8FCpU-vi47JzXFvVhQZowbc7Z__UEWk7JxP28Yk2dlUs2WyOszDRQKXj3uqO-G4EkHXi2f-vXM9bY3zOGBkpYxgwYZMGdw"/>
+<div>
+<p class="text-sm text-on-surface"><span class="font-bold">Priya</span> just registered for <span class="text-primary">Bengaluru Food Festival</span>.</p>
+<p class="text-[10px] text-on-surface-variant mt-1">2 hours ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<img class="w-8 h-8 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-background" data-alt="Portrait of a professional man in spectacles, urban background with bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2d0f8S9JCU9Y7mHVEElDImR_1un47xsM5GWmBZlfavAWlPcGN2bDyDrnq6KsUL8w81HshTYwhhOIInOqGQBnVQyh2NsaAtP2892DhUC_vJsQNqDbQBtWKa5ZC1jZ_P7YZBvFt2Pfn2vYp04i-zfNjG2F9VLkDJljEAjKY8pO2kfWbcBY2xJ0zUZxXoiePdV0uSlpxxgH6trz9t6L_NpOSakUV01ltA765phqDK_ao0rWSsN1FVnaM11rzXmvlvNIJYIsKizFuzg8"/>
+<div>
+<p class="text-sm text-on-surface"><span class="font-bold">Arjun</span> is attending <span class="text-primary">React India 2024</span>.</p>
+<p class="text-[10px] text-on-surface-variant mt-1">5 hours ago</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Following Feed -->
+<div class="lg:w-2/3 space-y-8">
+<div class="flex items-end justify-between border-b border-outline-variant pb-4">
+<h1 class="text-4xl md:text-5xl font-black font-headline tracking-tighter uppercase">Activity <span class="text-primary italic">Stream</span></h1>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="tune">tune</span>
+</button>
+</div>
+</div>
+<!-- Chronological Feed -->
+<div class="space-y-8">
+<!-- Activity Card 1 -->
+<div class="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-primary before:to-transparent">
+<div class="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#cdbdff]"></div>
+<div class="surface-container rounded-lg overflow-hidden transition-all hover:translate-x-2 border-l-2 border-primary">
+<div class="p-6 space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-secondary-fixed" data-icon="campaign">campaign</span>
+</div>
+<p class="text-sm font-bold text-on-surface">Nasscom <span class="font-normal text-on-surface-variant">just posted a new event</span></p>
+<span class="ml-auto text-[10px] uppercase font-bold text-outline">Just Now</span>
+</div>
+<div class="relative h-48 rounded-lg overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Modern tech conference stage with neon violet lighting and large digital screens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeIQy2BbBuMdTCgH3GR4woltDOxDG1TBQnK5wUFbT97OjztSZjxus_yCLh9qPrRD7RCJ6DqapLPHQ0nmO5xyXlU-do_zO60AKF9-Emj_10vT7xPfsxVpwDTEK_oQK7sBc7PjursO1eEdWmVDUBPMgMIXn5K2aNYiuZ3u9xQ8nhudOaktESe3PkV_yy9ROP6iaf_DiSRBZL1eXJOMYfQQT0-H5H8Xjjq21MmZrJxKYx_PO5aNzX8-V_BPrQwCZlfg0WHYwP1tNuUM0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="text-xl font-bold font-headline text-white">National Tech Conclave 2024</h3>
+<p class="text-xs text-primary-fixed">Oct 12-14 • Bengaluru International Exhibition Centre</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 vortex-gradient text-on-primary py-3 rounded-full font-bold text-sm tracking-tight active:scale-95 transition-transform">
+                                            View Event
+                                        </button>
+<button class="px-4 py-3 bg-surface-container-highest rounded-full text-on-surface hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 2 -->
+<div class="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-outline-variant">
+<div class="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="surface-container rounded-lg p-6 space-y-4 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-secondary-fixed" data-icon="update">update</span>
+</div>
+<p class="text-sm font-bold text-on-surface">GDG Bengaluru <span class="font-normal text-on-surface-variant">updated agenda for DevFest</span></p>
+<span class="ml-auto text-[10px] uppercase font-bold text-outline">2h ago</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded border-l-4 border-secondary-fixed">
+<p class="text-sm text-on-surface italic">"Keynote speaker added: Dr. Elena Rossi on 'The Future of Neural Networks in Production'."</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border border-background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnlo9soFFeHU7gPs67xbsXCUJZkmOpvclxAhM6PaVCaN48tbuz3DABFj9Wr9KNGk_77pX3uDkINTffS7Miglt0aD4wmO1-kl0crLdoDKBftLKB8EDwxR7igWbN7wDRjjWQHqhO8BlVr1G-ls25tqg4dLzLH_DtwIkijfHFDoFHYqz_ehVQYCx5wflzpQu1fzsmtgiibMCfN8O0mbTRNSUpQobwoKG8K5qHIKZTT0NvJY5AIjWcZSo2TKErC83S66LAnZnfU-Bj7mc"/>
+<img class="w-6 h-6 rounded-full border border-background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9itZ6Pxwkk0hOWg2Ye7cNIOs2UOG90OJ3NiEhzHSyAWtZ5-KIhnDie65_o1jWGFWjzVLPQ8wgMIE5G87Is2S0c54wygIoAAm_oX0YLYiuyreY-sy7IQWg1M5MHCKW7z7gVvAeTYdV6CQVIQiuaHMRfW_jpDrUuXBRMFF-gclflRWEBUPoCxjBXsmTw9qlj8UXaLbgERwFL-S5RzCOCN_NosVkjQhoQbyFdHSA170bBV6dp6a6tLAx9RIR5Pn6qrNn1fJRE_t4hc"/>
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-background flex items-center justify-center text-[8px] font-bold">+12</div>
+</div>
+<button class="text-xs font-bold text-secondary-fixed border border-secondary-fixed/30 px-4 py-2 rounded-full hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-all">
+                                        Check Updates
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Activity Card 3 -->
+<div class="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-outline-variant">
+<div class="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="surface-container rounded-lg p-6 space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-secondary-fixed" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<p class="text-sm font-bold text-on-surface">Food Fest Intl <span class="font-normal text-on-surface-variant">is opening early bird tickets</span></p>
+<span class="ml-auto text-[10px] uppercase font-bold text-outline">5h ago</span>
+</div>
+<p class="text-sm text-on-surface-variant">Grab your tickets for the annual Bengaluru Food Festival before prices hike tomorrow!</p>
+<div class="flex gap-2">
+<button class="bg-secondary-fixed text-on-secondary-fixed px-6 py-2 rounded-full font-bold text-xs uppercase tracking-tighter hover:scale-105 transition-transform">Get Ticket</button>
+<button class="bg-surface-container-high text-on-surface px-6 py-2 rounded-full font-bold text-xs uppercase tracking-tighter">Remind Me</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-background/90 backdrop-blur-xl z-50 flex justify-around items-center py-4 px-2">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="text-[10px] font-bold">SAVED</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-[10px] font-bold">PLAN</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-secondary-fixed" href="#">
+<span class="material-symbols-outlined font-bold" data-icon="rss_feed" style="font-variation-settings: 'FILL' 1;">rss_feed</span>
+<span class="text-[10px] font-bold">FEED</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="text-[10px] font-bold">HISTORY</span>
+</a>
+</nav>
+</body></html>

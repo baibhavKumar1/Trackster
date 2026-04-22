@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trackster Attendee Dashboard | My History &amp; Reviews</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#556d00",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-bright": "#39393b",
+                        "on-primary": "#370096",
+                        "inverse-surface": "#e5e1e4",
+                        "surface-container": "#201f21",
+                        "surface-container-lowest": "#0e0e10",
+                        "inverse-on-surface": "#313032",
+                        "background": "#131315",
+                        "surface-container-high": "#2a2a2c",
+                        "surface-tint": "#cdbdff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "tertiary": "#c6c6c6",
+                        "surface-dim": "#131315",
+                        "primary-container": "#5d21df",
+                        "on-tertiary-container": "#c8c8c8",
+                        "on-surface-variant": "#cbc3d9",
+                        "secondary": "#ffffff",
+                        "secondary-fixed-dim": "#abd600",
+                        "secondary-fixed": "#c3f400",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "on-primary-fixed": "#20005f",
+                        "surface-container-low": "#1c1b1d",
+                        "outline-variant": "#494456",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "outline": "#948da2",
+                        "inverse-primary": "#6833ea",
+                        "on-secondary-fixed": "#161e00",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353437",
+                        "on-secondary": "#283500",
+                        "on-secondary-fixed-variant": "#3c4d00",
+                        "surface": "#131315",
+                        "primary-fixed-dim": "#cdbdff",
+                        "on-tertiary": "#2f3131",
+                        "primary-fixed": "#e8deff",
+                        "secondary-container": "#c3f400",
+                        "on-primary-container": "#cebfff",
+                        "on-background": "#e5e1e4",
+                        "surface-variant": "#353437",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary": "#cdbdff",
+                        "on-surface": "#e5e1e4",
+                        "tertiary-container": "#525454"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131315;
+            color: #e5e1e4;
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass-card {
+            background: rgba(53, 52, 55, 0.4);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(205, 189, 255, 0.05);
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #cdbdff 0%, #6833ea 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background overflow-x-hidden">
+<!-- Persistent SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#131315] flex flex-col p-6 space-y-8 z-50 shadow-[20px_0_80px_rgba(0,0,0,0.45)]">
+<div class="text-[#cdbdff] font-['Space_Grotesk'] font-bold text-2xl tracking-tighter">NOCTURNE</div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="Portrait of a stylish man in a dark turtleneck with neon purple rim lighting reflecting on his face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxy8dSDi7KTHCY7WA4TC_-ztozU4B-pGwWJEyWSTaH12PkcnhUbhOpnXfy8Ef9-NJkZF_Sik5A29yXum3O3KtXOq7isGuj94oZddvg_lgGcVqKLnTYun5oMeU9omIJTygC5a_y69o6l3txCN5sL7LxVJb1CAH7dFPV4H_MCrPdiIv4_EW-kSsA6IixZQaFgxb2h3pbZ2cqDRd9B8O6s9pZAU0y1By1YTrJwhj3_43F2l7g6OuXQxuYyx0djieQaT2a3drV0aouoNQ"/>
+</div>
+<div>
+<p class="font-['Manrope'] text-sm font-bold text-[#cdbdff]">VIP Attendee</p>
+<p class="font-['Manrope'] text-xs text-[#cbc3d9]">Elite Member</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-['Manrope'] text-sm font-medium">Saved Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Manrope'] text-sm font-medium">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] hover:bg-[#201f21] rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="rss_feed">rss_feed</span>
+<span class="font-['Manrope'] text-sm font-medium">Following</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#cdbdff] text-[#131315] rounded-full font-bold shadow-[0_0_20px_rgba(205,189,255,0.3)]" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Manrope'] text-sm">History</span>
+</a>
+</nav>
+<button class="w-full kinetic-gradient py-3 rounded-full text-[#131315] font-bold text-sm shadow-[0_10px_30px_rgba(104,51,234,0.3)] hover:scale-[1.02] transition-transform">
+            Book New Event
+        </button>
+<div class="pt-6 border-t border-outline-variant/10 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Manrope'] text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#cbc3d9] hover:text-[#cdbdff] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-['Manrope'] text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen p-8 lg:p-12">
+<!-- Header Section -->
+<header class="mb-12 flex justify-between items-end">
+<div>
+<h1 class="font-headline text-5xl font-bold tracking-tight text-on-surface mb-2 uppercase">History &amp; Reviews</h1>
+<p class="font-body text-on-surface-variant max-w-xl text-lg">A chronicle of your journey through the electric pulse of Nocturne's exclusive events.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container rounded-full px-6 py-3 flex items-center gap-3 border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="query_stats">query_stats</span>
+<span class="font-headline font-bold text-xl">11.6</span>
+</div>
+</div>
+</header>
+<!-- Asymmetric Content Layout -->
+<div class="asymmetric-grid">
+<!-- Left Column: Event Timeline & Reviews -->
+<div class="space-y-12">
+<!-- Event Timeline Section -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline text-2xl font-bold tracking-tight">Event Timeline</h2>
+<span class="bg-secondary-fixed/10 text-secondary-fixed px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Visual Archive</span>
+</div>
+<div class="relative ml-4 pl-12 border-l-2 border-outline-variant/20 space-y-16">
+<!-- Timeline Node 1 -->
+<div class="relative group">
+<div class="absolute -left-[3.25rem] top-0 w-6 h-6 rounded-full bg-primary border-4 border-background group-hover:scale-125 transition-transform duration-300"></div>
+<div class="glass-card rounded-lg p-6 flex gap-6 hover:bg-surface-container-high/60 transition-colors">
+<div class="w-32 h-32 rounded-md overflow-hidden flex-shrink-0">
+<img alt="Event Cover" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Vibrant EDM festival stage with laser lights, smoke, and a massive crowd silhouette in a purple-blue color palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_eoybR0-0QUn8V_dTrI6-d5jXGhodD_Tm-SKFtKFJuf3ycPriws3Z50XcsHTaDoxmlaiEDZB8bchhhKez0FQgu6s3K0xbyriZW_V5_k4vChQrB4ZexkJ3qRmUkSY5dNjJUPP_ie97jLUmPODKVj6TBgwWFde1yceFZeobiF0Xlptg5VmjCiFZzbw1BtKttEwqwlubX8tLSOinhr_QAmIm_mm4wHrF_bwFi8pEV7tj-tgrmx4Dii7Os558f36LFn76Klkd5qSV7iA"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label text-xs text-secondary-fixed font-bold tracking-tighter uppercase mb-1">Oct 24, 2023</p>
+<h3 class="font-headline text-2xl font-bold mb-1">Cyber-Pulse Festival</h3>
+<p class="font-body text-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span> Tokyo, JP
+                                            </p>
+</div>
+<div class="bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-bold text-on-surface uppercase tracking-widest">Attended</div>
+</div>
+<div class="mt-4 flex gap-2">
+<div class="flex items-center text-secondary-fixed">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+</div>
+<span class="text-xs text-on-surface-variant font-medium self-center">Excellent experience</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone Badge -->
+<div class="relative py-4">
+<div class="absolute -left-[4.5rem] top-1/2 -translate-y-1/2 bg-secondary-fixed text-on-secondary-fixed w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(195,244,0,0.4)]">
+<span class="material-symbols-outlined text-3xl" data-icon="celebration">celebration</span>
+</div>
+<div class="ml-8">
+<h4 class="font-headline text-xl font-bold text-secondary-fixed">🎉 5 Events Club!</h4>
+<p class="font-body text-sm text-on-surface-variant">You've reached elite status by attending 5 high-profile events this season.</p>
+</div>
+</div>
+<!-- Timeline Node 2 -->
+<div class="relative group">
+<div class="absolute -left-[3.25rem] top-0 w-6 h-6 rounded-full bg-outline-variant border-4 border-background group-hover:scale-125 transition-transform duration-300"></div>
+<div class="glass-card rounded-lg p-6 flex gap-6 hover:bg-surface-container-high/60 transition-colors opacity-80 group-hover:opacity-100">
+<div class="w-32 h-32 rounded-md overflow-hidden flex-shrink-0">
+<img alt="Event Cover" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Underground jazz club atmosphere with neon signs, whiskey glasses, and a saxophone player in moody blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG1bbVdZQ9DX42JYdrGj2jeGW37Vte4gqSJ9AldXAepZeBLai3V7DU7g71WLMDN2OTfBOBAULlmkkkJUAPQHwnTL7BiLr_1HWqhNuOGoEg247CjjbXRqbXnteSBx4tAPjRt607TqC8erpnZnudSh6JUvV7KWp_GHan48rYNiphPbwv1QHmEAeoVTRRkrwnzITb3QI2gJvkBFoeLltsq0OVVe3InOktcz2wxLVgcTFyWV4WUBBqFdjCvrOs4X0oOGfmaBpVOD8j6Eg"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label text-xs text-on-surface-variant font-bold tracking-tighter uppercase mb-1">Sep 12, 2023</p>
+<h3 class="font-headline text-2xl font-bold mb-1">Neon Velvet Underground</h3>
+<p class="font-body text-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span> Berlin, DE
+                                            </p>
+</div>
+<button class="bg-primary/20 text-primary px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-colors">Pending Review</button>
+</div>
+<p class="mt-4 text-sm text-on-surface-variant italic font-body">Waiting for your feedback to unlock event-exclusive media gallery.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="mt-16">
+<div class="flex items-center gap-8 border-b border-outline-variant/10 mb-8">
+<button class="pb-4 text-secondary-fixed border-b-2 border-secondary-fixed font-headline font-bold tracking-tight text-lg">Reviews Written (14)</button>
+<button class="pb-4 text-on-surface-variant hover:text-on-surface font-headline font-medium tracking-tight text-lg transition-colors">Pending Reviews (3)</button>
+</div>
+<div class="space-y-6">
+<div class="surface-container-low rounded-lg p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-outline-variant/30 text-6xl" data-icon="format_quote">format_quote</span>
+</div>
+<div class="flex gap-4 items-center mb-4">
+<div class="flex text-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill">star</span>
+</div>
+<span class="text-xs font-bold font-headline uppercase tracking-widest text-on-surface-variant">Aug 02, 2023</span>
+</div>
+<h4 class="font-headline text-xl font-bold mb-3">Midnight Gala Experience</h4>
+<p class="font-body text-on-surface-variant leading-relaxed">The immersive audio installation was beyond anything I've experienced. Truly felt like stepping into another dimension. The concierge service was impeccable.</p>
+<div class="mt-6 flex gap-4">
+<button class="text-xs font-bold uppercase tracking-tighter text-on-surface-variant hover:text-secondary-fixed transition-colors">Edit Review</button>
+<button class="text-xs font-bold uppercase tracking-tighter text-on-surface-variant hover:text-error transition-colors">Delete</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Charts & Badges -->
+<div class="space-y-12">
+<!-- Spending Summary Section -->
+<section class="glass-card rounded-lg p-8">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline text-xl font-bold uppercase tracking-tight">Spending Summary</h2>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+</div>
+<div class="h-48 flex items-end justify-between gap-4 px-2">
+<!-- Bar Chart -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-surface-container-highest rounded-t-md h-[40%] group-hover:bg-primary transition-all"></div>
+<span class="font-label text-[10px] text-on-surface-variant uppercase">Jun</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-surface-container-highest rounded-t-md h-[65%] group-hover:bg-primary transition-all"></div>
+<span class="font-label text-[10px] text-on-surface-variant uppercase">Jul</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-secondary-fixed rounded-t-md h-[95%] shadow-[0_-5px_15px_rgba(195,244,0,0.3)]"></div>
+<span class="font-label text-[10px] text-secondary-fixed font-bold uppercase">Aug</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-surface-container-highest rounded-t-md h-[55%] group-hover:bg-primary transition-all"></div>
+<span class="font-label text-[10px] text-on-surface-variant uppercase">Sep</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-surface-container-highest rounded-t-md h-[30%] group-hover:bg-primary transition-all"></div>
+<span class="font-label text-[10px] text-on-surface-variant uppercase">Oct</span>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest mb-1">Total Spent</p>
+<p class="text-2xl font-headline font-bold text-on-surface">$2,840.00</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-2 border-secondary-fixed">
+<p class="text-[10px] uppercase font-bold text-secondary-fixed tracking-widest mb-1">Avg / Event</p>
+<p class="text-2xl font-headline font-bold text-on-surface">$236.00</p>
+</div>
+</div>
+</section>
+<!-- Achievements / Badges Grid -->
+<section>
+<h2 class="font-headline text-xl font-bold mb-8 uppercase tracking-tight">Unlocked Badges</h2>
+<div class="grid grid-cols-2 gap-6">
+<div class="flex flex-col items-center text-center p-6 glass-card rounded-lg hover:border-primary/20 transition-all cursor-default">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 border border-outline-variant/10 text-primary group">
+<span class="material-symbols-outlined text-3xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h5 class="font-headline font-bold text-sm mb-1">First Event</h5>
+<p class="font-body text-[10px] text-on-surface-variant uppercase tracking-tighter">Genesis attendee</p>
+</div>
+<div class="flex flex-col items-center text-center p-6 glass-card rounded-lg hover:border-secondary-fixed/20 transition-all cursor-default relative overflow-hidden">
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-secondary-fixed text-xs" data-icon="verified">verified</span>
+</div>
+<div class="w-16 h-16 rounded-full kinetic-gradient flex items-center justify-center mb-4 text-on-primary shadow-lg">
+<span class="material-symbols-outlined text-3xl" data-icon="public">public</span>
+</div>
+<h5 class="font-headline font-bold text-sm mb-1">Globe Trotter</h5>
+<p class="font-body text-[10px] text-on-surface-variant uppercase tracking-tighter">3+ Different Countries</p>
+</div>
+<div class="flex flex-col items-center text-center p-6 glass-card rounded-lg opacity-50 border-dashed border-outline-variant/30">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-3xl text-outline-variant" data-icon="workspace_premium">workspace_premium</span>
+</div>
+<h5 class="font-headline font-bold text-sm mb-1 text-on-surface-variant">Top Spender</h5>
+<p class="font-body text-[10px] text-on-surface-variant uppercase tracking-tighter">Lock: 10k Volume</p>
+</div>
+<div class="flex flex-col items-center text-center p-6 glass-card rounded-lg hover:border-primary/20 transition-all cursor-default">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 border border-outline-variant/10 text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="nightlife">nightlife</span>
+</div>
+<h5 class="font-headline font-bold text-sm mb-1">Nocturnal King</h5>
+<p class="font-body text-[10px] text-on-surface-variant uppercase tracking-tighter">10 After-parties</p>
+</div>
+</div>
+</section>
+<!-- Monthly Activity Insight -->
+<section class="relative bg-primary-container/20 p-8 rounded-lg overflow-hidden border border-primary/10">
+<div class="absolute top-0 right-0 -m-8 w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
+<h2 class="font-headline text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+                        Pulse Insight
+                    </h2>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                        Your activity peak was in <span class="text-secondary-fixed font-bold">August</span>. You are currently in the top <span class="text-secondary-fixed font-bold">3%</span> of European attendees for tech and underground music sectors.
+                    </p>
+<button class="mt-6 flex items-center gap-2 text-primary font-bold font-headline text-sm group">
+                        VIEW FULL ANALYTICS
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</section>
+</div>
+</div>
+<!-- Footer Spacer -->
+<footer class="h-24"></footer>
+</main>
+<!-- Floating Action Button - Contextual Suppression Check: Hidden on History Page per instructions -->
+</body></html>
